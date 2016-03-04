@@ -6,7 +6,11 @@ var mongoose = require('mongoose');
 
 
 var OptionSchema = new mongoose.Schema({
-
+    titre: String,
+    description: String,
+    duree: Number,
+    nbMaxUser: Number,
+    animation: { type: mongoose.Schema.Types.ObjectId, ref: 'Animation' }
 });
 
 

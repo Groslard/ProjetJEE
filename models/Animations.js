@@ -6,7 +6,10 @@ var mongoose = require('mongoose');
 
 
 var AnimationSchema = new mongoose.Schema({
-
+    titre: String,
+    descriptif: String,
+    imgPath: String,
+    Option: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Option' }]
 });
 
 

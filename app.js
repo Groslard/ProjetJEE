@@ -2,10 +2,15 @@
 var mongoose = require('mongoose');
 var passport = require('passport');
 require('./models/Posts');
+require('./models/Animations');
+require('./models/Creneaux');
+require('./models/Options');
 require('./models/Comments');
 require('./models/Users');
+require('./models/Animations');
+
 require('./config/passport');
-mongoose.connect('mongodb://localhost/news');
+mongoose.connect('mongodb://localhost/brest2016');
 
 var express = require('express');
 var path = require('path');
@@ -17,6 +22,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
 
 var app = express();
 

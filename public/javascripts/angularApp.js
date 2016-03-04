@@ -10,8 +10,11 @@ app.config([
             templateUrl: '/home.html',
             controller: 'MainCtrl',
             resolve: {
-                postPromise: ['posts', function (posts) {
-                    return posts.getAll();
+                postPromise: ['animations', function (animations) {
+
+
+
+                    return animations.getAll();
                 }]
             }
         });
@@ -54,6 +57,7 @@ app.config([
 
 
 // la factory est utilisé dans le controller
+/*
 app.factory('posts', ['$http', 'auth', function ($http, auth) {
     var o = {
         posts: []
@@ -102,7 +106,34 @@ app.factory('posts', ['$http', 'auth', function ($http, auth) {
     };
 
     return o;
+}]);*/
+
+
+app.factory('animations', ['$http', 'auth', function ($http, auth) {
+    var o = {
+        animations: []
+    };
+
+    o.getAll = function () {
+        return $http.get('/animations').success(function (data) {
+            console.log(data);
+            angular.copy(data, o.animations);
+        });
+    };
+
+    o.create = function (animation) {
+        return $http.post('/animations', animation, {
+            headers: {Authorization: 'Bearer '+auth.getToken()}
+        }).success(function (data) {
+            o.animations.push(data);
+        });
+    };
+
+
+
+    return o;
 }]);
+
 
 app.factory('auth', ['$http', '$window', function ($http, $window) {
     var auth = {};
@@ -158,27 +189,27 @@ app.factory('auth', ['$http', '$window', function ($http, $window) {
 // Les controllers sont appelé depuis l ejs
 app.controller('MainCtrl', [
     '$scope',
-    'posts',
+    'animations',
     'auth',
-    function ($scope, posts, auth) {
-        $scope.posts = posts.posts;
+    function ($scope, animations, auth) {
+        $scope.animations = animations.animations;
         $scope.isLoggedIn = auth.isLoggedIn;
 
-        $scope.addPost = function () {
+        $scope.addAnimations = function () {
             if (!$scope.title || $scope.title === '') {
                 return;
             }
-            posts.create({
-                title: $scope.title,
-                link: $scope.link,
+            animations.create({
+                titre: $scope.title,
+                descriptif: $scope.description,
+                imgPath:$scope.link,
             });
             $scope.title = '';
             $scope.link = '';
+            $scope.description = '';
         };
 
-        $scope.incrementUpvotes = function (post) {
-            posts.upvote(post);
-        };
+
 
 
     }]);

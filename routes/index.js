@@ -4,7 +4,7 @@ var passport = require('passport');
 var jwt = require('express-jwt');
 var mongoose = require('mongoose');
 
-var Post = mongoose.model('Post');
+Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var User = mongoose.model('User');
 

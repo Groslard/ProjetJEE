@@ -34,7 +34,7 @@ router.get('/posts', function (req, res, next) {
 
 router.post('/posts', auth, function (req, res, next) {
     var post = new Post(req.body);
-    post.author = req.payload.username;
+    post.author = req.payload.nom;
 
 
     post.save(function (err, post) {
@@ -112,7 +112,7 @@ router.get('/posts/:post/comments', function (req, res, next) {
 router.post('/posts/:post/comments', auth, function (req, res, next) {
     var comment = new Comment(req.body);
     comment.post = req.post;
-    comment.author = req.payload.username;
+    comment.author = req.payload.nom;
 
     comment.save(function (err, comment) {
         if (err) {

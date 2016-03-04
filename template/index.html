@@ -42,7 +42,7 @@
 
                 <!-- SECTION TILES -->
                 <div class="tile turquoise icon-featurefade w1 h1">
-                    <a class="link" href="#" data-option-value="*">
+                    <a class="link" href="#" data-option-value="*" data-toggle="modal" data-target=".popup-saisie-code">
                         <i class="icon-list icon-4x"></i>
                         <p class="title">All</p>
                     </a>
@@ -102,45 +102,41 @@
                     </a>
                 </div>
 
-                <div class="tile spectacle imagetile icon-fadein w2 h2">
-                    <a href="#galleryvideo" data-lightbox="mlightboxvideo" class="link" 
-                       data-src="http://www.youtube.com/embed/VbDZmbx474k?modestbranding=1" data-title="Metromega" data-description="by Grozav">
-                        <i class="icon-youtube-play icon-3x"></i>
-                        <img src="img/05_thumbnail.jpg" alt="" />
-                    </a>
-                </div>
-
-                <div class="tile spectacle imagetile icon-fadein w2 h2">
-                    <a href="#galleryvideo" data-lightbox="mlightboxvideo" class="link" 
-                       data-src="http://player.vimeo.com/video/72726988?badge=0" data-title="Metromega" data-description="by Grozav">
-                        <i class="icon-youtube-play icon-3x"></i>
-                        <img src="img/06_thumbnail.jpg" alt="" />
-                    </a>
-                </div>
-
-                <div class="tile divers imagetile icon-fadein w2 h1">
+                <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
                     <a href="#galleryimage" data-lightbox="mlightboximage" class="link" 
-                       data-src="img/07_preview.jpg" data-title="CityHUB" data-description="by sandracz">
-                        <i class="icon-laptop icon-3x"></i>
-                        <img src="img/07_thumbnail.jpg" alt="" />
+                       data-src="img/02_preview.jpg" data-title="Solana" data-description="by abcgomel">
+                        <i class="icon-4x"></i>
+                        <img src="img/03_thumbnail.jpg" alt=""  />
+                        <p class="title">&nbsp.title-indent .icon-fadeoutscaleup</p>
                     </a>
                 </div>
 
-                <div class="tile spectacle imagetile icon-fadein w2 h1">
+                <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
                     <a href="#galleryimage" data-lightbox="mlightboximage" class="link" 
-                       data-src="img/08_preview.jpg" data-title="Webolize" data-description="by VictoryDesign">
-                        <i class="icon-laptop icon-3x"></i>
-                        <img src="img/08_thumbnail.jpg" alt="" />
+                       data-src="img/02_preview.jpg" data-title="Solana" data-description="by abcgomel">
+                        <i class="icon-4x"></i>
+                        <img src="img/03_thumbnail.jpg" alt=""  />
+                        <p class="title">&nbsp.title-indent .icon-fadeoutscaleup</p>
                     </a>
                 </div>
 
-                 <div class="tile visite imagetile icon-fadein w2 h1">
+                <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
                     <a href="#galleryimage" data-lightbox="mlightboximage" class="link" 
-                       data-src="img/01_preview.jpg" data-title="Generic" data-description="by PierreBorodin">
-                        <i class="icon-laptop icon-3x"></i>
-                        <img src="img/01_thumbnail.jpg" alt=""/>
+                       data-src="img/02_preview.jpg" data-title="Solana" data-description="by abcgomel">
+                        <i class="icon-4x"></i>
+                        <img src="img/03_thumbnail.jpg" alt=""  />
+                        <p class="title">&nbsp.title-indent .icon-fadeoutscaleup</p>
                     </a>
                 </div>
+
+                <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
+                    <a href="#galleryimage" data-lightbox="mlightboximage" class="link" 
+                       data-src="img/02_preview.jpg" data-title="Solana" data-description="by abcgomel">
+                        <i class="icon-4x"></i>
+                        <img src="img/03_thumbnail.jpg" alt=""  />
+                        <p class="title">&nbsp.title-indent .icon-fadeoutscaleup</p>
+                    </a>
+                </div>  
 
                 <!-- /SECTION TILES -->
 
@@ -266,55 +262,58 @@
         <!-- /PRELOADER -->
 
         <!-- GALLERY LIGHTBOX -->
+        <!-- /FORM CODE -->
+        <div class="modal fade popup-saisie-code" tabindex="-1"  aria-labelledby="mySmallModalLabel" style="width: 0;">
+
+                <!-- SECTION TILES -->
+                <div class="tile black htmltile w2 h2">
+                    <div class="tilecontent">
+                        <div class="content">
+                            <div id="messageload" class="hide textcenter">
+                                <h3>Sending</h3><br/>
+                                <img src="img/preloader.gif" alt="..."/>
+                            </div>
+
+                            <form id="contactme" class="form-dark" name="cform" method="post" action="http://metromega.grozav.com/mail.php">
+                                <div class="row-fluid">
+                                    <label>First Name <span class="hide label-important firstname-missing pull-right">First name is missing!</span></label>
+                                    <input id="firstname" name="firstname" type="text" class="span12" placeholder="Your First Name">
+                                </div>
+                                <div class="row-fluid">
+                                    <button type="submit" class="btn btn-primary btn-block pull-right">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /SECTION TILES -->
+
+        </div>  
+        <!-- GALLERY LIGHTBOX -->
         <section class="mlightbox" id="galleryimage">
             <section class="mlightbox-content">
                 <img src="#"  alt=""/>
-            </section>
-            <section class="mlightbox-details">
-                <div class="mlightbox-description">
-                    <h2 class='mlightbox-title'>Metromega</h2>
-                    <p class="mlightbox-subtitle muted">by Grozav</p>
-                </div>
-                <ul class="mlist">
-                    <li><a class="close-mlightbox" href="#"><i class="icon-arrow-left"></i> Back to Metromega</a></li>
-                    <li></li>
-                    <li><a target="_blank" href="http://facebook.com/grozavcom"><i class="icon-facebook-sign"></i> Like us on Facebook</a></li>
-                    <li><a target="_blank" href="https://twitter.com/intent/user?screen_name=grozavcom"><i class="icon-twitter-sign"></i> Follow us on Twitter</a></li>
-                </ul>
-            </section>
-        </section>
-        <!-- /GALLERY LIGHTBOX -->
+                <div class="tile white htmltile w4 h3" style="position:absolute;width:50%;background-color:black;color:black;top:60%;padding-bottom:10%;left:10%;font-size:16px;">
+                    <div class="tilecontent">
 
-        <!-- VIDEO LIGHTBOX -->
-        <section class="mlightbox" id="galleryvideo">
-            <section class="mlightbox-content">
-                <div class="fitvideo">
-                    <iframe width="560" height="315" src="http://www.youtube.com/embed/VbDZmbx474k?modestbranding=1"></iframe>
+                        Super description de l'animation
+                    </div>
                 </div>
             </section>
             <section class="mlightbox-details">
                 <div class="mlightbox-description">
-                    <h2 class='mlightbox-title'>Metromega</h2>
-                    <p class="mlightbox-subtitle muted">by Grozav</p>
+                    <h2 class='mlightbox-title'>Titre animation</h2>
+                    <p class="mlightbox-subtitle muted">Sous-titre animation</p>
                 </div>
                 <ul class="mlist">
-                    <li><a class="close-mlightbox" href="#"><i class="icon-arrow-left"></i> Back to Metromega</a></li>
+                    <li><a class="close-mlightbox" href="#"><i class="icon-arrow-left"></i> hello !</a></li>
                     <li></li>
-                    <li><a target="_blank" href="http://facebook.com/grozavcom"><i class="icon-facebook-sign"></i> Like us on Facebook</a></li>
+                    <li><a target="_blank" href="http://facebook.com/grozavcom"><i class="icon-facebook-sign"></i> Like us on Youporn</a></li>
                     <li><a target="_blank" href="https://twitter.com/intent/user?screen_name=grozavcom"><i class="icon-twitter-sign"></i> Follow us on Twitter</a></li>
                 </ul>
             </section>
         </section>
-        <!-- /VIDEO LIGHTBOX -->
-
-        <!-- BLOG LIGHTBOX -->
-        <section class="mlightbox" id="blogpost">
-            <section class="blogpost-content">
-            </section>
-            <section class="blogpost-details">
-            </section>
-        </section>
-        <!-- /BLOG LIGHTBOX -->
+        
 
         <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> <!-- jQuery Library -->
         <script src="js/respond.min.js" type="text/javascript"></script> <!-- Responsive Library -->

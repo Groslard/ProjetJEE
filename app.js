@@ -5,7 +5,7 @@ require('./models/Posts');
 require('./models/Comments');
 require('./models/Users');
 require('./config/passport');
-mongoose.connect('mongodb://localhost/news');
+mongoose.connect('mongodb://localhost/brest2016');
 
 var express = require('express');
 var path = require('path');

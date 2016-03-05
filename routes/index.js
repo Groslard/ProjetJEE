@@ -4,9 +4,13 @@ var passport = require('passport');
 var jwt = require('express-jwt');
 var mongoose = require('mongoose');
 
-var Post = mongoose.model('Post');
+Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var User = mongoose.model('User');
+var Animation = mongoose.model('AnimationBateau');
+var Creneaux = mongoose.model('Creneau');
+var Option = mongoose.model('Option');
+
 
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
@@ -21,28 +25,28 @@ module.exports = router;
 /* Get Posts route */
 
 // POSTS ROUTES
-router.get('/posts', function (req, res, next) {
-    Post.find(function (err, posts) {
+
+router.get('/animations', function (req, res, next) {
+    Animation.find(function (err, animations) {
         if (err) {
             return next(err);
         }
 
-        res.json(posts);
+        res.json(animations);
     });
 });
 
+router.post('/animations', auth, function (req, res, next) {
+    var animation = new Animation(req.body);
+   
 
-router.post('/posts', auth, function (req, res, next) {
-    var post = new Post(req.body);
-    post.author = req.payload.username;
 
-
-    post.save(function (err, post) {
+    animation.save(function (err, animation) {
         if (err) {
             return next(err);
         }
-
-        res.json(post);
+        console.log(Animation.findOne());
+        res.json(animation);
     });
 });
 
@@ -112,7 +116,7 @@ router.get('/posts/:post/comments', function (req, res, next) {
 router.post('/posts/:post/comments', auth, function (req, res, next) {
     var comment = new Comment(req.body);
     comment.post = req.post;
-    comment.author = req.payload.username;
+    comment.author = req.payload.nom;
 
     comment.save(function (err, comment) {
         if (err) {
@@ -181,3 +185,5 @@ router.post('/login', function (req, res, next) {
         }
     })(req, res, next);
 });
+
+

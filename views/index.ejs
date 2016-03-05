@@ -31,26 +31,19 @@
         <h1>Flapper News</h1>
     </div>
 
-    <div ng-repeat="post in posts | orderBy:'-upvotes'">
-        <span class="glyphicon glyphicon-thumbs-up"
-              ng-click="incrementUpvotes(post)"></span>
-        {{post.upvotes}}
-        <span style="font-size:20px; margin-left:10px;">
-          <a ng-show="post.link" href="{{post.link}}">
-              {{post.title}}
-          </a>
-          <span ng-hide="post.link">
-            {{post.title}}
+    <div ng-repeat="animation in animations ">
+
+
+          <span >
+            {{animation.titre}}
           </span>
+        <span >
+            {{animation.descriptif}}
+        </span>
+        <span >
+            {{animation.imgPath}}
         </span>
 
-        <span ng-show="post.author">
-          posted by <a>{{post.author}}</a> |
-        </span>
-
-        <span>
-            <a href="#/posts/{{post._id}}">Comments</a>
-        </span>
     </div>
 
     <!-- IF USER IS NOT LOGGED IN -->
@@ -59,21 +52,27 @@
     </div>
 
     <!-- IF USER LOGGED IN -->
-    <form ng-submit="addPost()"
+    <form ng-submit="addAnimations()"
           ng-show="isLoggedIn()"
           style="margin-top:30px;">
-        <h3>Add a new post</h3>
+        <h3>Add a new animations</h3>
 
         <div class="form-group">
             <input type="text"
                    class="form-control"
-                   placeholder="Title"
+                   placeholder="titre"
                    ng-model="title"/>
         </div>
         <div class="form-group">
             <input type="text"
                    class="form-control"
-                   placeholder="Link"
+                   placeholder="description"
+                   ng-model="description"/>
+        </div>
+        <div class="form-group">
+            <input type="text"
+                   class="form-control"
+                   placeholder="lien image"
                    ng-model="link"/>
         </div>
         <button type="submit" class="btn btn-primary">Post</button>
@@ -121,6 +120,38 @@
         <button type="submit" class="btn btn-primary">Post</button>
     </form>
 </script>
+
+
+
+<script type="text/ng-template" id="/animation.html">
+    <div class="page-header">
+        <h1>Flapper News</h1>
+    </div>
+
+    <div ng-show="error" class="alert alert-danger row">
+        <span>{{ error.message }}</span>
+    </div>
+
+    <form ng-submit="addAnimation()"
+          style="margin-top:30px;">
+        <h3>Register</h3>
+
+        <div class="form-group">
+            <input type="text"
+                   class="form-control"
+                   placeholder="title"
+                   ng-model="title"></input>
+        </div>
+        <div class="form-group">
+            <input type="password"
+                   class="form-control"
+                   placeholder="link"
+                   ng-model="link"></input>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</script>
+
 
 <script type="text/ng-template" id="/register.html">
     <div class="page-header">

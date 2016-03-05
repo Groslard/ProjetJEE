@@ -14,4 +14,6 @@ var AnimationSchema = new mongoose.Schema({
 
 
 
-mongoose.model('Animation', AnimationSchema);
+mongoose.model('AnimationBateau', AnimationSchema);
+mongoose.model('AnimationSpectacle', AnimationSchema);
+mongoose.model('AnimationRestauration', AnimationSchema);

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     /*==== ISOTOPE LAYOUT ====*/
     var $container = $('.section');
 
@@ -238,6 +237,15 @@ $(document).ready(function() {
             //stay on the page
             return false;
         }
+    });
+
+    /*==== Ajout d'options dans la création d'une animation ====*/
+    var nbOption = 1;
+
+    $(".btn-add-panel").on("click", function () {
+        $( ".accordion" ).append( "<div class='accordion-group'> <div class='accordion-heading' style='margin-bottom: 0px;'> <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' href='#collapse"+nbOption+"'> <div class='row-fluid' style='margin-bottom: 0px;'> <span class='hide label-important title-missing pull-right'>Title is missing!</span> <input id='titre' name='titre' type='text' class='span12' placeholder='Titre de l`option' style='margin-bottom: 0px;'> </div> </a> </div> <div id='collapse"+nbOption+"' class='accordion-body collapse out' style='margin-bottom: 0px;'> <div class='accordion-inner'> <div class='row-fluid'> <label>Description <span class='hide label-important message-missing pull-right'>You forgot to enter a description!</span></label> <textarea name='description' placeholder='Description de l`option ' id='description' class='input-xlarge span12' rows='4'></textarea> </div> <div> Nombre de places <input type='number' name='points' min='0' max='10000' step='1' value='30'> </div> <!-- Single-value slider: --> <input id='ex16a' type='text'/><br/> <!-- Range slider: --> <input id='ex16b' type='text'/><br/>" );
+        nbOption++;
+        $(".mCS-light-thick").mCustomScrollbar("update");
     });
 
     /*==== mLightBox ====*/

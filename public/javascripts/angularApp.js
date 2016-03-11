@@ -7,13 +7,10 @@ app.config([
     function ($stateProvider, $urlRouterProvider) {
         $stateProvider.state('home', {
             url: '/home',
-            templateUrl: '/home.html',
+            templateUrl: 'index.ejs',
             controller: 'MainCtrl',
             resolve: {
                 postPromise: ['animations', function (animations) {
-
-
-
                     return animations.getAll();
                 }]
             }
@@ -52,61 +49,8 @@ app.config([
             }]
         });
 
-        $urlRouterProvider.otherwise('home');
+       //$urlRouterProvider.otherwise('home');
     }]);
-
-
-// la factory est utilisé dans le controller
-/*
-app.factory('posts', ['$http', 'auth', function ($http, auth) {
-    var o = {
-        posts: []
-    };
-
-    o.getAll = function () {
-        return $http.get('/posts').success(function (data) {
-            angular.copy(data, o.posts);
-        });
-    };
-
-    o.create = function (post) {
-        return $http.post('/posts', post, {
-            headers: {Authorization: 'Bearer '+auth.getToken()}
-        }).success(function (data) {
-            o.posts.push(data);
-        });
-    };
-
-    o.upvote = function (post) {
-        return $http.put('/posts/' + post._id + '/upvote', null, {
-            headers: {Authorization: 'Bearer '+auth.getToken()}
-        }).success(function (data) {
-                post.upvotes += 1;
-            });
-    };
-
-    o.upvoteComment = function(post, comment) {
-        return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/upvote', null, {
-            headers: {Authorization: 'Bearer '+auth.getToken()}
-        }).success(function(data){
-            comment.upvotes += 1;
-        });
-    };
-
-    o.get = function (id) {
-        return $http.get('/posts/' + id).then(function (res) {
-            return res.data;
-        });
-    };
-
-    o.addComment = function (id, comment) {
-        return $http.post('/posts/' + id + '/comments', comment, {
-            headers: {Authorization: 'Bearer '+auth.getToken()}
-        });
-    };
-
-    return o;
-}]);*/
 
 
 app.factory('animations', ['$http', 'auth', function ($http, auth) {
@@ -163,7 +107,7 @@ app.factory('auth', ['$http', '$window', function ($http, $window) {
             var token = auth.getToken();
             var payload = JSON.parse($window.atob(token.split('.')[1]));
 
-            return payload.username;
+            return payload.nom;
         }
     };
 

@@ -14,9 +14,9 @@
 
     <!-- Scripts are at the bottom of the page -->
 
-
 </head>
 <body ng-app="flapperNews" >
+
 
 <!-- BACKGROUND -->
 <img src="/img/background-1.jpg" class="background" alt="" />
@@ -74,6 +74,7 @@
 
         <!-- SECTION TILES -->
         <div class="tile black htmltile w2 h11">
+
             <div class="tilecontent">
                 <form class="form-dark"  >
                     <form id="formrecherche" class="form-dark" name="rechercheform" >
@@ -189,35 +190,27 @@
     <!-- /SECTION -->
 
     <!-- SECTION CREATION D'UTILISATEUR -->
-    <section class="clearfix section" id="creationform">
+    <section ng-controller="AuthCtrl" class="clearfix section" id="creationform">
 
         <h3 class="block-title">Création d'utilisateur</h3>
+
 
         <div class="tile black htmltile w3 h2">
             <div class="tilecontent">
                 <div class="content">
 
-                    <div class="hide textcenter" id="messagecreateusersuccess">
-                        <br/><br/><br/>
-                        <h1>Thank you! <a class="icon-envelope"></a></h1>
-                        <br/><br/><br/>
-                        <h3>Your user has been create.</h3>
-                        <br/><br/><br/><br/><br/>
+                    <div ng-show="error" class="alert alert-danger row">
+                        <span>{{ error.message }}</span>
                     </div>
 
-                    <div id="messagecreateuserload" class="hide textcenter">
-                        <h3>Sending</h3><br/>
-                        <img src="img/preloader.gif" alt="..."/>
-                    </div>
-
-                    <form id="formcreateuser" class="form-dark" name="userform" >
+                    <form ng-submit="register()" class="form-dark">
                         <div class="row-fluid">
                             <span class="hide label-important title-missing pull-right">Le nom est manquant!</span>
-                            <input id="nom" name="nom" type="text" class="span12" placeholder="Nom de l'utilisateur">
+                            <input ng-model="user.nom" type="text" class="span12" placeholder="Nom de l'utilisateur">
                         </div>
                         <div class="row-fluid">
                             <span class="hide label-important firstname-missing pull-right">Le code est manquant!</span>
-                            <input id="code" name="code" type="text" class="span12" placeholder="Code de l'utilisateur">
+                            <input ng-model="user.code" type="text" class="span12" placeholder="Code de l'utilisateur">
                         </div>
                         <button type="submit" class="btn btn-primary btn-block pull-right">Créer l'utilisateur</button>
                     </form>
@@ -297,6 +290,7 @@
                         <input id="firstname" name="firstname" type="text" class="span12" placeholder="Saisissez votre code ici">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block pull-right">Se connecter</button>
+
                 </form>
             </div>
 

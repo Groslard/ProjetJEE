@@ -159,7 +159,7 @@ router.post('/register', function (req, res, next) {
 
     user.save(function (err) {
         if (err) {
-            return next(err);
+            return res.status(400).json({message: 'Username Already Used'});
         }
 
         return res.json({token: user.generateJWT()})

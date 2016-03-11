@@ -4,12 +4,13 @@
 
         <meta charset="utf-8" />
         <title>Brest 2016</title>
-
+        
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+
         <link rel="stylesheet" href="css/style.css" />
 
         <!-- Scripts are at the bottom of the page -->
@@ -72,9 +73,9 @@
 
 
                 <!-- SECTION TILES -->
-                <div class="tile black htmltile w1 h1 testicule">
+                <div class="tile black htmltile w1 h1">
                     <div class="tilecontent">
-                        <form class="form-dark "  >
+                        <form class="form-dark"  >
                                 <input id="firstname" name="firstname" type="text" class="span12" placeholder="Your First Name">
                                 <input id="firstname" name="firstname" type="text" class="span12" placeholder="Your First Name">
                         </form>
@@ -92,9 +93,9 @@
             <section class="clearfix section" id="gallery">
 
                 <!-- SECTION TILES -->
-
+              
 				<div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
-                    <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
+                    <a href="#galleryimage" data-lightbox="mlightboximage" class="link" 
                        data-src="img/04_preview.jpg" data-title="Solana" data-description="by abcgomel">
                         <i class="icon-4x"></i>
                         <img src="img/04_thumbnail.jpg" alt=""  />
@@ -103,7 +104,7 @@
                 </div>
 
                 <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
-                    <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
+                    <a href="#galleryimage" data-lightbox="mlightboximage" class="link" 
                        data-src="img/02_preview.jpg" data-title="Solana" data-description="by abcgomel">
                         <i class="icon-4x"></i>
                         <img src="img/03_thumbnail.jpg" alt=""  />
@@ -112,7 +113,7 @@
                 </div>
 
                 <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
-                    <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
+                    <a href="#galleryimage" data-lightbox="mlightboximage" class="link" 
                        data-src="img/02_preview.jpg" data-title="Solana" data-description="by abcgomel">
                         <i class="icon-4x"></i>
                         <img src="img/03_thumbnail.jpg" alt=""  />
@@ -121,7 +122,7 @@
                 </div>
 
                 <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
-                    <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
+                    <a href="#galleryimage" data-lightbox="mlightboximage" class="link" 
                        data-src="img/02_preview.jpg" data-title="Solana" data-description="by abcgomel">
                         <i class="icon-4x"></i>
                         <img src="img/03_thumbnail.jpg" alt=""  />
@@ -130,17 +131,17 @@
                 </div>
 
                 <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
-                    <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
+                    <a href="#galleryimage" data-lightbox="mlightboximage" class="link" 
                        data-src="img/02_preview.jpg" data-title="Solana" data-description="by abcgomel">
                         <i class="icon-4x"></i>
                         <img src="img/03_thumbnail.jpg" alt=""  />
                         <p class="title">&nbsp.title-indent .icon-fadeoutscaleup</p>
                     </a>
-                </div>
+                </div>  
 
                 <!-- /SECTION TILES -->
 
-            </section>
+            </section> 
             <!-- /SECTION -->
 
             <!-- SECTION -->
@@ -176,23 +177,18 @@
 
 
                                 <div class="row-fluid">
-                                    <label>Type d'animation</label>
+                                    <label>Subject</label>
                                     <select id="subject" name="subject" class="span12">
-                                        <option value="service">Bateau</option>
-                                        <option value="suggestions">Pestacle</option>
-                                        <option value="product">Autre</option>
+                                        <option value="service">General Customer Service</option>
+                                        <option value="suggestions">Suggestions</option>
+                                        <option value="product">Product Support</option>
                                     </select>
                                 </div>
 
                                 <div class="row-fluid">
                                     <label>Description <span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
-                                    <textarea name="description" placeholder="Description de l'animation "id="description" class="input-xlarge span12" rows="4"></textarea>
+                                    <textarea name="description" id="description" class="input-xlarge span12" rows="4"></textarea>
                                 </div>
-
-                                <div class="row-fluid">
-                                </div>
-                                    <label>Date de l'animation<span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
-                                    <input type="date" name="jour" min="2016-07-13" max="2016-07-19" >
 
                                 <div class="control-group">
                                     <label class="control-label" for="fileInput">Image </label>
@@ -200,14 +196,52 @@
                                         <input class="input-file" id="fileInput" type="file">
                                     </div>
                                 </div>
-                                <div class="accordion" id="accordionOption">
-                                  <!-- ajout des options avec du jkiri -->
-                                </div>
-                                 <button type="button" class="btn btn-lg btn-primary btn-add-panel">
-                                    Ajouter une option
+
+
+                                <!-- ACCORDION -->
+                                <div class="panel-group" id="accordion1">
+                                    <div class="panel panel-default template">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse20">
+                                                    Option 1
+                                                </a>
+                                            </h4>
+
+                                        </div>
+                                        <div class="row-fluid">
+                                            <label>Titre <span class="hide label-important title-missing pull-right">Title is missing!</span></label>
+                                            <input id="titre" name="titre" type="text" class="span12" placeholder="Titre de l'animation ">
+                                        </div>
+
+                                        <div class="row-fluid">
+                                            <label>Description <span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
+                                            <textarea name="description" id="description" class="input-xlarge span12" rows="4"></textarea>
+                                        </div>
+                                        <div>
+                                            Nombre de places:
+                                            <input type="number" name="points" min="0" max="10000" step="1" value="30">
+                                        </div>
+                                            <!-- Single-value slider: -->
+                                            <input id="ex16a" type="text"/><br/>
+
+                                            <!-- Range slider: -->
+                                            <input id="ex16b" type="text"/><br/>
+                                            <script>
+                                                new Slider("#ex16a", { min: 0, max: 10, value: 0, focus: true });
+                                                new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
+                                            </script>
+                                        </div>
+                                    </div>
+                                <br />
+                                <button type="button" class="btn btn-lg btn-primary btn-add-panel">
+                                    Add new panel
                                 </button>
+
+
+
                                 <div class="row-fluid">
-                                    <button type="submit" class="btn btn-primary btn-block pull-right">Enregistrer</button>
+                                    <button type="submit" class="btn btn-primary btn-block pull-right">Send</button>
                                 </div>
                             </form>
                         </div>
@@ -237,7 +271,7 @@
             </section>
             <!-- /SECTION -->
 
-        </section>
+        </section> 
         <!-- /MAIN CONTENT SECTION -->
 
         <!-- LOCKSCREEN -->
@@ -276,6 +310,7 @@
         <!-- GALLERY LIGHTBOX -->
         <!-- /FORM CODE -->
         <div class="modal fade popup-saisie-code" tabindex="-1"  aria-labelledby="mySmallModalLabel" style="width: 0;">
+
                 <!-- SECTION TILES -->
                 <div class="tile black htmltile w3 h1">
                     <div class="tilecontent">
@@ -291,7 +326,7 @@
                                     <input id="firstname" name="firstname" type="text" class="span12" placeholder="Saisissez votre code ici">
                                 </div>
                                     <button type="submit" class="btn btn-primary btn-block pull-right">Se connecter</button>
-
+                                    
                                 </div>
                             </form>
                         </div>
@@ -299,7 +334,7 @@
                 </div>
                 <!-- /SECTION TILES -->
 
-        </div>
+        </div>  
         <!-- GALLERY LIGHTBOX -->
         <section class="mlightbox" id="galleryimage">
             <section class="mlightbox-content">
@@ -332,13 +367,40 @@
         <script src="js/jquery.mCustomScrollbar.js" type="text/javascript"></script> <!-- malihu Scrollbar -->
         <script src="js/tileshow.js" type="text/javascript"></script> <!-- Metromega Custom Tileshow Plugin -->
         <script src="js/mlightbox.js" type="text/javascript"></script> <!-- Metromega Custom Lightbox Plugin -->
+        <script src="js/jquery.fitVids.js" type="text/javascript"></script> <!-- jQuery fitVids Plugin -->
         <script src="js/lockscreen.js" type="text/javascript"></script> <!-- Metromega Lockscreen -->
         <script src="js/bootstrap.min.js" type="text/javascript"></script> <!-- Bootstrap Library -->
-        <script src="js/script.js" type="text/javascript"></script> <!-- Metromega Script -->
 
-      <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-    <script src="js/jQEditRangeSlider-min.js"></script>
-    <script>
-    </script>
+        <script src="js/script.js" type="text/javascript"></script> <!-- Metromega Script -->
+        <script>
+            var $template = $(".template");
+
+            var hash = 1;
+
+            $(".btn-add-panel").on("click", function () {
+                var $newPanel = $template.clone();
+                $newPanel.find(".collapse").removeClass("in");
+                $newPanel.find(".accordion-toggle").attr("href",  "#" + (++hash))
+                        .text("Option " + hash);
+                $newPanel.find(".panel-collapse").attr("id", hash).addClass("collapse").removeClass("in");
+                $("#accordion1").append($newPanel.fadeIn());
+            });
+        </script>
+        <script>
+            $(function() {
+                $( "#slider-range" ).slider({
+                    range: true,
+                    min: 0,
+                    max: 500,
+                    values: [ 75, 300 ],
+                    slide: function( event, ui ) {
+                        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                    }
+                });
+                $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+                        " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+            });
+        </script>
+
     </body>
 </html>

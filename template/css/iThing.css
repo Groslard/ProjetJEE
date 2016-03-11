@@ -180,14 +180,8 @@
 
 .ui-rangeSlider-label{
   padding: 5px 10px;
-  bottom:40px;
+  bottom:5px;
 
-  -moz-border-radius: 4px;
-       border-radius: 4px;
-
-  -webkit-box-shadow: 0px 1px 0px #c2c5d6;
-     -moz-box-shadow: 0px 1px 0px #c2c5d6;
-          box-shadow: 0px 1px 0px #c2c5d6;
 
   color:white;
   font-size:15px;
@@ -201,11 +195,8 @@
   left: 50%;
   display: block;
   z-index:99;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
 
   margin-left: -10px;
-  border-top: 10px solid #888DA0;
 }
 
 .ui-rangeSlider-disabled .ui-rangeSlider-label-inner{

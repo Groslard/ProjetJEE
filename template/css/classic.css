@@ -73,10 +73,10 @@
 	margin:0 2px 2px;
 	background-position:bottom center;
 	background-repeat:no-repeat;
-	  white-space: nowrap;
-	  bottom:0px;
-	  padding:3px 6px 7px;
-	  cursor:col-resize;
+  white-space: nowrap;
+  bottom:-10px;
+  padding:3px 6px 7px;
+  cursor:col-resize;
 }
 
 .ui-rangeSlider-label-inner{

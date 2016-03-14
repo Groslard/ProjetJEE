@@ -244,7 +244,7 @@ $(document).ready(function() {
     var nbOption = 1;
 
     $(".btn-add-panel").on("click", function () {
-        $( ".accordion" ).append( "<div class='accordion-group'> <div class='accordion-heading' style='margin-bottom: 0px;'> <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' href='#collapse"+nbOption+"'> <div class='row-fluid' style='margin-bottom: 0px;'> <span class='hide label-important title-missing pull-right'>Title is missing!</span> <input id='titre' name='titre' type='text' class='span12' placeholder='Titre de l`option' style='margin-bottom: 0px;'> </div> </a> </div> <div id='collapse"+nbOption+"' class='accordion-body collapse out' style='margin-bottom: 0px;'> <div class='accordion-inner'> <div class='row-fluid'> <label>Description <span class='hide label-important message-missing pull-right'>You forgot to enter a description!</span></label> <textarea name='description' placeholder='Description de l`option ' id='description' class='input-xlarge span12' rows='4'></textarea> </div><div class='row-fluid'> Nombre de places <input type='number' name='points' min='0' max='10000' step='1' value='100'> </div> <div class='row-fluid'> Durée de l'option (en minutes) <input type='number' name='points' min='1' max='480' step='' value='30'> </div> <div class='row-fluid'><label>Créneau de l'animation</label> <br><br><br> <div id='creneauOption"+nbOption+"'></div> </div><br/>");
+        $( ".accordion" ).append( "<div class='accordion-group'> <div class='accordion-heading' style='margin-bottom: 0px;'> <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' href='#collapse"+nbOption+"'> <div class='row-fluid' style='margin-bottom: 0px;'><input id='titre' name='titre' type='text' class='span12' placeholder='Titre de l`option' style='margin-bottom: 0px; width:85%;'>  <button type='button' class='btn btn-lg btn-primary  pull-right btn-del-panel'  style='height: 35px;'>X</button></div> </a> </div> <div id='collapse"+nbOption+"' class='accordion-body collapse out' style='margin-bottom: 0px;'> <div class='accordion-inner'> <div class='row-fluid'> <label>Description <span class='hide label-important message-missing pull-right'>You forgot to enter a description!</span></label> <textarea name='description' placeholder='Description de l`option ' id='description' class='input-xlarge span12' rows='4'></textarea> </div><div class='row-fluid'> Nombre de places <input type='number' name='points' min='0' max='10000' step='1' value='100'> </div> <div class='row-fluid'> Durée de l'option (en minutes) <input type='number' name='points' min='1' max='480' step='' value='30'> </div> <div class='row-fluid'><label>Créneau de l'animation</label> <br><br><br> <div id='creneauOption"+nbOption+"'></div> </div><br/>");
        // $(".mCS-light-thick").mCustomScrollbar("update");
         $("#creneauOption"+nbOption+"").editRangeSlider({
           bounds: {min: 8, max: 20},
@@ -253,6 +253,10 @@ $(document).ready(function() {
         nbOption++;
     });
 
+    $(".btn-del-panel").on("click", function () {
+
+        $( ".accordion-group" ).remove();
+    });
 
 
     /*==== mLightBox ====*/

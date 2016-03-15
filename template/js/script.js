@@ -34,6 +34,17 @@ $(document).ready(function() {
             autoExpandHorizontalScroll: true
         }
     });
+     $(".mlightbox-details").mCustomScrollbar({
+        mouseWheelPixels: 300,
+        theme: 'light-thick',
+        scrollButtons: {
+            enable: true
+        },
+        advanced: {
+            updateOnContentResize: true,
+            autoExpandHorizontalScroll: true
+        }
+    });
 
 
     /*==== SCROLLTO ====*/

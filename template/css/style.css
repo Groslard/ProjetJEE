@@ -1917,3 +1917,9 @@ body {
 .mCS-dark-thin>.mCSB_scrollTools .mCSB_buttonRight{
     background-position:-80px -56px;
 }
+
+.option-title{
+    font-size: 32px; 
+    line-height: 1.1em; 
+    margin-bottom: 0.1em;
+}

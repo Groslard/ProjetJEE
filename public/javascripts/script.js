@@ -30,6 +30,18 @@ $(document).ready(function() {
             enable: true
         },
         advanced: {
+            updateOnContentResize: true,
+            autoExpandHorizontalScroll: true
+        }
+    });
+     $(".mlightbox-details").mCustomScrollbar({
+        mouseWheelPixels: 300,
+        theme: 'light-thick',
+        scrollButtons: {
+            enable: true
+        },
+        advanced: {
+            updateOnContentResize: true,
             autoExpandHorizontalScroll: true
         }
     });
@@ -242,12 +254,48 @@ $(document).ready(function() {
     /*==== Ajout d'options dans la création d'une animation ====*/
     var nbOption = 1;
 
-    $(".btn-add-panel").on("click", function () {
-        $( ".accordion" ).append( "<div class='accordion-group'> <div class='accordion-heading' style='margin-bottom: 0px;'> <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' href='#collapse"+nbOption+"'> <div class='row-fluid' style='margin-bottom: 0px;'> <span class='hide label-important title-missing pull-right'>Title is missing!</span> <input id='titre' name='titre' type='text' class='span12' placeholder='Titre de l`option' style='margin-bottom: 0px;'> </div> </a> </div> <div id='collapse"+nbOption+"' class='accordion-body collapse out' style='margin-bottom: 0px;'> <div class='accordion-inner'> <div class='row-fluid'> <label>Description <span class='hide label-important message-missing pull-right'>You forgot to enter a description!</span></label> <textarea name='description' placeholder='Description de l`option ' id='description' class='input-xlarge span12' rows='4'></textarea> </div> <div> Nombre de places <input type='number' name='points' min='0' max='10000' step='1' value='30'> </div> <!-- Single-value slider: --> <input id='ex16a' type='text'/><br/> <!-- Range slider: --> <input id='ex16b' type='text'/><br/>" );
+   $(".btn-add-panel").on("click", function () {
+        $( ".accordion" ).append( "<div class='accordion-group' id='accordion"+nbOption+"' style='border: 1px solid #52a8ec;border-radius: 0px'> <div class='accordion-heading' style='margin-bottom: 0px;'> <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' href='#collapse"+nbOption+"'> <div class='row-fluid' style='margin-bottom: 0px;'><input id='titre' name='titre' type='text' class='span12' placeholder='Titre de l`option' style='margin-bottom: 0px; width:85%;'>  <button type='button' id='btnDel"+nbOption+"' class='btn btn-lg btn-primary  pull-right btn-del-panel'  style='height: 35px;'>X</button></div> </a> </div> <div id='collapse"+nbOption+"' class='accordion-body collapse out' style='margin-bottom: 0px;'> <div class='accordion-inner'> <div class='row-fluid'> <label>Description <span class='hide label-important message-missing pull-right'>You forgot to enter a description!</span></label> <textarea name='description' placeholder='Description de l`option ' id='description' class='input-xlarge span12' rows='4'></textarea> </div><div class='row-fluid'> Nombre de places <input type='number' name='points' min='0' max='10000' step='1' value='100'> </div> <div class='row-fluid'> Durée de l'option (en minutes) <input type='number' name='points' min='1' max='480' step='' value='30'> </div> <div class='row-fluid'><label>Créneau de l'animation</label> <br><br><br> <div id='creneauOption"+nbOption+"'></div> </div><br/>");
+       // $(".mCS-light-thick").mCustomScrollbar("update");
+        $("#creneauOption"+nbOption+"").editRangeSlider({
+          bounds: {min: 8, max: 20},
+          defaultValues:{min: 9, max: 18}
+        });
+   /*     $("#btnDel"+nbOption+"").on("click", function () {
+            $("#accordion"+nbOption+"").remove();
+        });*/
+        $("#btnDel1").on("click", function () {
+            $("#accordion1").remove();
+        });
+        $("#btnDel2").on("click", function () {
+            $("#accordion2").remove();
+        });
+        $("#btnDel3").on("click", function () {
+            $("#accordion3").remove();
+        });
+        $("#btnDel4").on("click", function () {
+            $("#accordion4").remove();
+        });
+        $("#btnDel5").on("click", function () {
+            $("#accordion5").remove();
+        });
+        $("#btnDel6").on("click", function () {
+            $("#accordion6").remove();
+        });
+        $("#btnDel7").on("click", function () {
+            $("#accordion7").remove();
+        });
+        $("#btnDel8").on("click", function () {
+            $("#accordion8").remove();
+        });
         nbOption++;
-        $(".mCS-light-thick").mCustomScrollbar("update");
+
+        
     });
 
+
+   
+    
     /*==== mLightBox ====*/
     $('a[data-lightbox="mlightboximage"]').each(function() {
         $(this).mlightbox('image');

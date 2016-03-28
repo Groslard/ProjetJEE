@@ -418,14 +418,6 @@ body {
     line-height:528px;
 }
 
-.h11{
-    height:150px;
-    line-height:150px;
-}
-.h11 i, .h11 img{
-    line-height:150px;
-}
-
 /*==== 2.12 Tile Width ====*/
 .ws{
     width:52px;
@@ -1280,7 +1272,7 @@ body {
 }
 #opensidebar i{
     cursor:pointer;
-    width:100px;
+    width:35px; 
     height:35px; 
     line-height:35px;
     display:block;
@@ -1924,4 +1916,10 @@ body {
 }
 .mCS-dark-thin>.mCSB_scrollTools .mCSB_buttonRight{
     background-position:-80px -56px;
+}
+
+.option-title{
+    font-size: 32px; 
+    line-height: 1.1em; 
+    margin-bottom: 0.1em;
 }

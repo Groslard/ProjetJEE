@@ -164,19 +164,26 @@
                             <label>Description <span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
                             <textarea  ng-model="description" name="description" placeholder="Description de l'animation "id="description" class="input-xlarge span12" rows="4"></textarea>
                         </div>
+ 
+                    <div class="row-fluid">
+                    </div>
+                    <label>Date de l'animation<span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
+                    <input type="date" name="jour" min="2016-07-13" max="2016-07-19" >
+ 
                         <div class="control-group">
                             <label class="control-label" for="fileInput">Image </label>
                             <div class="controls">
                                 <input ng-model="link" class="input-file" id="fileInput" type="file">
                             </div>
                         </div>
+                         <div class="accordion" id="accordionOption">
+                        <!-- ajout des options avec du jkiri -->
+                        </div>
                         <button type="button" class="btn btn-lg btn-primary btn-add-panel">
                             Ajouter une option
                         </button>
 
-                        <div class="accordion" id="accordion2">
-                            <!-- ajout des options avec du jkiri -->
-                        </div>
+                         <br><br>
                         <div class="row-fluid">
                             <button type="submit" class="btn btn-primary btn-block pull-right">Enregister</button>
                         </div>
@@ -254,13 +261,18 @@
 <!-- /LOCKSCREEN -->
 
 <!-- SIDEBAR -->
-<div id="opensidebar">
-    <a class="link" href="#" data-option-value="*" data-toggle="modal" data-target=".popup-saisie-code">
-        <i>
-        <p class="title">Connexion</p>
-        </i>
-    </a>
-</div>
+<div id="opensidebar"><i class="icon-3x">+</i></div>
+<section id="sidebar" class="htmltile">
+    <ul>
+        <li></li>
+        <li><a data-scroll="scrollto"  href="#start" ><i class="icon-windows icon-3x"></i></a></li>
+        <li><a data-scroll="scrollto"  href="#services" ><i class="icon-pencil icon-3x"></i></a></li>
+        <li><a data-scroll="scrollto"  href="#about" ><i class="icon-user icon-3x"></i></a></li>
+        <li><a data-scroll="scrollto"  href="#portfolio" ><i class="icon-picture icon-3x"></i></a></li>
+        <li><a data-scroll="scrollto"  href="#articles" ><i class="icon-file-text icon-3x"></i></a></li>
+        <li><a data-scroll="scrollto"  href="#contactform" ><i class="icon-envelope icon-3x"></i></a></li>
+    </ul>
+</section>
 
 <!-- /SIDEBAR -->
 
@@ -311,18 +323,51 @@
             </div>
         </div>
     </section>
-    <section class="mlightbox-details">
-        <div class="mlightbox-description">
+   <section class="mlightbox-details">
+        <!-- <div class="mlightbox-description">
             <h2 class='mlightbox-title'>Titre animation</h2>
             <p class="mlightbox-subtitle muted">Sous-titre animation</p>
+        </div> -->
+        <div class='accordion-group' id='accordion' style='border: 1px solid #52a8ec;border-radius: 0px'>
+ 
+            <div class='accordion-heading' style='margin-bottom: 0px;'>
+                <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' href='#collapse'>
+                    <h3 class="option-title" style="font-size: 20px;">Titre de l'option</h3>
+                </a>
+            </div>
+            <div id='collapse' class='accordion-body collapse out lead' style='margin-bottom: 0px;'>
+                <div class='accordion-inner'>
+                    <div class='row-fluid ' style="font-size: 13px;">Navbars currently have a limitation with multiple .navbar-right classes. To properly spaccontent, we use negative margin on the last .navbar-right element. When there are multiple elements using that class, these margins don't work as intended. </div>
+                        <div class='row-fluid' style="font-weight: bold; text-align: center;"> Places restantes
+                            <div class="progress progress-striped active">
+                                <div class="bar" style="width: 40%;"></div> 
+                            </div>
+                        </div>
+                        <div class='row-fluid'>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Créneaux</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><button type='button' id='btnDel"+nbOption+"' class='btn btn-lg btn-primary  pull-right btn-del-panel'  style='height: 35px;'>X</button></td>
+                                        <td>15h30 - 16h15</td>
+                                    </tr>
+                                    <tr>
+                                        <td><button type='button' id='btnDel"+nbOption+"' class='btn btn-lg btn-primary  pull-right btn-del-panel disabled'  style='height: 35px;'>X</button></td>
+                                        <td>16h15 - 17h00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        <ul class="mlist">
-            <li><a class="close-mlightbox" href="#"><i class="icon-arrow-left"></i> hello !</a></li>
-            <li></li>
-            <li><a target="_blank" href="http://facebook.com/grozavcom"><i class="icon-facebook-sign"></i> Like us on Youporn</a></li>
-            <li><a target="_blank" href="https://twitter.com/intent/user?screen_name=grozavcom"><i class="icon-twitter-sign"></i> Follow us on Twitter</a></li>
-        </ul>
-    </section>
+        
+</section>
 </section>
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
@@ -341,14 +386,7 @@
 
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 <script src="/javascripts/jQEditRangeSlider-min.js"></script>
-<script>
-    //<!--
-    $("#creneauAnimation").editRangeSlider({
-        bounds: {min: 8, max: 20},
-        defaultValues:{min: 9, max: 18}
-    });
-    //-->
-</script>
+
 
 </body>
 </html>

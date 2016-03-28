@@ -148,7 +148,7 @@ router.put('/posts/:post/comments/:comment/upvote', auth, function (req, res, ne
 
 router.post('/register', function (req, res, next) {
     if (!req.body.nom || !req.body.code) {
-        return res.status(400).json({message: 'Please fill out all fields'});
+        return res.status(400).json({message: 'Veuillez remplir tous les champs !'});
     }
 
     var user = new User();
@@ -159,7 +159,7 @@ router.post('/register', function (req, res, next) {
 
     user.save(function (err) {
         if (err) {
-            return res.status(400).json({message: 'Username Already Used'});
+            return res.status(400).json({message: 'Utilisateur déja existant'});
         }
 
         return res.json({token: user.generateJWT()})
@@ -168,20 +168,21 @@ router.post('/register', function (req, res, next) {
 
 
 router.post('/login', function (req, res, next) {
-    console.log("body parsing", req.body);
-    if (!req.body.nom || !req.body.code) {
-        return res.status(400).json({message: 'Please fill out all fields'});
-    }
+    // On est obligé de passer un name pour que l'auth fonctionne
+    req.body.nom="name";
 
+    if (!req.body.code) {
+        return res.status(400).json({message: 'Veuillez saisir un code'});
+    }
     passport.authenticate('local', function (err, user, info) {
         if (err) {
             return next(err);
         }
-        console.log(err);
+
         if (user) {
             return res.json({token: user.generateJWT()});
         } else {
-            return res.status(401).json(info);
+            return res.status(401).json({message: 'Code incorrect'});
         }
     })(req, res, next);
 });

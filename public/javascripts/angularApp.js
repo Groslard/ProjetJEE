@@ -185,26 +185,41 @@ app.controller('PostsCtrl', [
         };
     }]);
 
+app.directive('modal', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attr) {
+            scope.dismiss = function() {
+                element.modal('hide');
+            };
+        }
+    }
+});
 app.controller('AuthCtrl', [
     '$scope',
     '$state',
     'auth',
-    function ($scope, $state, auth) {
+    '$element',
+    function ($scope, $state, auth, $element) {
         $scope.user = {};
 
         $scope.register = function () {
-            auth.register($scope.user).error(function (error) {
-                $scope.error = error;
-            }).then(function () {
-                $state.go('home');
-            });
+            auth.register($scope.user).
+                error(function (error) {
+                    $scope.error = error;
+                    $scope.success = false;
+                }).
+                success(function(data) {
+                    $scope.error = false;
+                    $scope.success = true;
+                });
         };
 
         $scope.logIn = function () {
             auth.logIn($scope.user).error(function (error) {
                 $scope.error = error;
-            }).then(function () {
-                $state.go('home');
+            }).success(function(data){
+                $scope.dismiss();
             });
         };
     }]);

@@ -195,62 +195,6 @@ $(document).ready(function() {
 
     /*==== METROMEGA CONTACT FORM ====*/
 
-    //submission scripts
-    $('#contactme').submit(function() {
-        //statements to validate the form	
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        var email = document.getElementById('email');
-        if (!filter.test(email.value)) {
-            $('.email-missing').fadeIn(500);
-        } else {
-            $('.email-missing').fadeOut(500);
-        }
-        if (document.cform.firstname.value == "") {
-            $('.firstname-missing').fadeIn(500);
-        } else {
-            $('.firstname-missing').fadeOut(500);
-        }
-        if (document.cform.lastname.value == "") {
-            $('.lastname-missing').fadeIn(500);
-        } else {
-            $('.lastname-missing').fadeOut(500);
-        }
-        if (document.cform.message.value == "") {
-            $('.message-missing').fadeIn(500);
-        } else {
-            $('.message-missing').fadeOut(500);
-        }
-        if ((document.cform.firstname.value == "") || (document.cform.lastname.value == "") || (!filter.test(email.value)) || (document.cform.message.value == "")) {
-            return false;
-        }
-
-        if ((document.cform.firstname.value != "") && (document.cform.lastname.value != "") && (filter.test(email.value)) && (document.cform.message.value != "")) {
-
-            $('#messageload').fadeIn();
-
-            $.post('mail.php', {
-                firstname: $('#firstname').val(),
-                lastname: $('#lastname').val(),
-                email: $('#email').val(),
-                subject: $('#subject option:selected').text(),
-                message: $('#message').val()
-            },
-            //return the data
-            function(data, status) {
-                $('#messageload').fadeOut();
-                if (status == 'success') {
-                    $('#contactme').fadeOut();
-                    $('#messagesuccess').fadeIn();
-                }
-                else {
-                    alert('Your message could not be sent. Please try again later!');
-                }
-            });
-            //stay on the page
-            return false;
-        }
-    });
-
     /*==== Ajout d'options dans la création d'une animation ====*/
     var nbOption = 1;
 

@@ -8,12 +8,12 @@ var mongoose = require('mongoose');
 var AnimationSchema = new mongoose.Schema({
     titre: String,
     descriptif: String,
+    typeAnim: String,
     imgPath: String,
     Option: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Option' }]
 });
 
 
 
-mongoose.model('AnimationBateau', AnimationSchema);
-mongoose.model('AnimationSpectacle', AnimationSchema);
+mongoose.model('Animation', AnimationSchema);
 mongoose.model('AnimationRestauration', AnimationSchema);

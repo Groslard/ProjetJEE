@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var User = mongoose.model('User');
-var Animation = mongoose.model('AnimationBateau');
+var Animation = mongoose.model('Animation');
 var Creneaux = mongoose.model('Creneau');
 var Option = mongoose.model('Option');
 

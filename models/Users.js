@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
     nom: {type: String, lowercase: true, unique: true},
-    code: String
+    code: String,
+    creneaux: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Creneaux' }]
 });
 
 UserSchema.methods.validCode = function (code) {

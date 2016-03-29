@@ -107,7 +107,7 @@
             <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
                data-src="/img/04_preview.jpg" data-title="" data-description= "">
                 <i class="icon-4x"></i>
-                <img src="/img/04_thumbnail.jpg" alt=""  />
+                <img src="/img/04_preview.jpg" alt=""  />
                 <p class="title"></p>
             </a>
         </div>
@@ -262,16 +262,27 @@
 </section>
 <!-- /LOCKSCREEN -->
 
-<!-- SIDEBAR -->
-<div id="opensidebar">
-    <a class="link" href="#" data-option-value="*" data-toggle="modal" data-target=".popup-saisie-code">
+<!-- CONNEXION -->
+<section id="connexion" ng-controller="AuthCtrl">
+    <div id="opensidebar" ng-hide="isLoggedIn()">
+        <a class="link" href="#" data-option-value="*" data-toggle="modal" data-target=".popup-saisie-code">
+            <i>
+            <p class="title">Connexion</p>
+            </i>
+        </a>
+    </div>
+
+
+<div id="opensidebar" ng-show="isLoggedIn()">
+    <a class="link" href="#" data-option-value="*" ng-click="logOut()">
         <i>
-        <p class="title">Connexion</p>
+            <p class="title">Deconnexion</p>
         </i>
     </a>
 </div>
+</section>
 
-<!-- /SIDEBAR -->
+<!-- /CONNEXION -->
 
 <!-- PRELOADER -->
 <section class="mlightbox" id="loader">
@@ -324,7 +335,7 @@
             <p class="mlightbox-subtitle muted">Sous-titre animation</p>
         </div> -->
         <div class='accordion-group' id='accordion' style='border: 1px solid #52a8ec;border-radius: 0px'>
- 
+
             <div class='accordion-heading' style='margin-bottom: 0px;'>
                 <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' href='#collapse'>
                     <h3 class="option-title" style="font-size: 20px;">Titre de l'option</h3>
@@ -335,7 +346,7 @@
                     <div class='row-fluid ' style="font-size: 13px;">Navbars currently have a limitation with multiple .navbar-right classes. To properly spaccontent, we use negative margin on the last .navbar-right element. When there are multiple elements using that class, these margins don't work as intended. </div>
                         <div class='row-fluid' style="font-weight: bold; text-align: center;"> Places restantes
                             <div class="progress progress-striped active">
-                                <div class="bar" style="width: 40%;"></div> 
+                                <div class="bar" style="width: 40%;"></div>
                             </div>
                         </div>
                         <div class='row-fluid'>
@@ -361,7 +372,7 @@
                 </div>
             </div>
         </div>
-        
+
 </section>
 </section>
 

@@ -152,10 +152,6 @@ app.controller('MainCtrl', [
             $scope.link = '';
             $scope.description = '';
         };
-
-
-
-
     }]);
 
 app.controller('PostsCtrl', [
@@ -202,6 +198,7 @@ app.controller('AuthCtrl', [
     '$element',
     function ($scope, $state, auth, $element) {
         $scope.user = {};
+        $scope.isLoggedIn = auth.isLoggedIn;
 
         $scope.register = function () {
             auth.register($scope.user).
@@ -222,6 +219,10 @@ app.controller('AuthCtrl', [
                 $scope.dismiss();
             });
         };
+
+        $scope.logOut = function () {
+            auth.logOut();
+            };
     }]);
 
 app.controller('NavCtrl', [

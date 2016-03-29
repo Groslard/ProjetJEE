@@ -7,7 +7,7 @@ app.config([
     function ($stateProvider, $urlRouterProvider) {
         $stateProvider.state('home', {
             url: '/home',
-            templateUrl: 'index.ejs',
+            templateUrl: '/home.html',
             controller: 'MainCtrl',
             resolve: {
                 postPromise: ['animations', function (animations) {
@@ -16,40 +16,7 @@ app.config([
             }
         });
 
-        $stateProvider.state('posts', {
-            url: '/posts/{id}',
-            templateUrl: '/posts.html',
-            controller: 'PostsCtrl',
-            resolve: {
-                post: ['$stateParams', 'posts', function ($stateParams, posts) {
-                    return posts.get($stateParams.id);
-                }]
-            }
-        });
-
-        $stateProvider.state('login', {
-            url: '/login',
-            templateUrl: '/login.html',
-            controller: 'AuthCtrl',
-            onEnter: ['$state', 'auth', function ($state, auth) {
-                if (auth.isLoggedIn()) {
-                    $state.go('home');
-                }
-            }]
-        });
-
-        $stateProvider.state('register', {
-            url: '/register',
-            templateUrl: '/register.html',
-            controller: 'AuthCtrl',
-            onEnter: ['$state', 'auth', function ($state, auth) {
-                if (auth.isLoggedIn()) {
-                    $state.go('home');
-                }
-            }]
-        });
-
-       //$urlRouterProvider.otherwise('home');
+       $urlRouterProvider.otherwise('home');
     }]);
 
 
@@ -60,7 +27,6 @@ app.factory('animations', ['$http', 'auth', function ($http, auth) {
 
     o.getAll = function () {
         return $http.get('/animations').success(function (data) {
-            console.log(data);
             angular.copy(data, o.animations);
         });
     };

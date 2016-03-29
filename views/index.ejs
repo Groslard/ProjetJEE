@@ -96,28 +96,7 @@
     </section>
     <!-- /SECTION -->
 
-    <!-- SECTION -->
-    <section class="clearfix section" id="gallery" ng-controller="MainCtrl">
-
-        <!-- SECTION TILES -->
-
-
-
-        <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
-            <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
-               data-src="/img/04_preview.jpg" data-title="" data-description= "">
-                <i class="icon-4x"></i>
-                <img src="/img/04_preview.jpg" alt=""  />
-                <p class="title"></p>
-            </a>
-        </div>
-
-       
-
-        <!-- /SECTION TILES -->
-
-    </section>
-    <!-- /SECTION -->
+    <ui-view></ui-view>
 
     <!-- SECTION -->
     <section class="clearfix section" id="animationform" ng-controller="MainCtrl">
@@ -375,6 +354,34 @@
 
 </section>
 </section>
+
+<script type="text/ng-template" id="/home.html">
+
+
+    <!-- SECTION -->
+    <section class="clearfix section" id="gallery" ng-controller="MainCtrl">
+
+        <!-- SECTION TILES -->
+
+
+        <div ng-repeat="animation in animations">
+        <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
+            <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
+               data-src="/img/04_preview.jpg" data-title="" data-description= "">
+                <i class="icon-4x"></i>
+                <img src="/img/04_preview.jpg" alt=""  />
+                <p class="title"></p>
+            </a>
+        </div>
+        </div>
+
+
+        <!-- /SECTION TILES -->
+
+    </section>
+    <!-- /SECTION -->
+
+</script>
 
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> <!-- jQuery Library -->
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>

@@ -5,53 +5,28 @@ app.config([
     '$stateProvider',
     '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider) {
+
         $stateProvider.state('home', {
             url: '/home',
-            templateUrl: 'index.ejs',
+            templateUrl: '/home.html',
             controller: 'MainCtrl',
             resolve: {
                 postPromise: ['animations', function (animations) {
+                    console.log("COUCOU");
                     return animations.getAll();
                 }]
             }
         });
 
-        $stateProvider.state('posts', {
-            url: '/posts/{id}',
-            templateUrl: '/posts.html',
-            controller: 'PostsCtrl',
-            resolve: {
-                post: ['$stateParams', 'posts', function ($stateParams, posts) {
-                    return posts.get($stateParams.id);
-                }]
-            }
-        });
+        //$stateProvider.state('home', {
+        //    url:"/home",
+        //    templateUrl: '/home.html',
+        //    controller: 'MainCtrl',
 
-        $stateProvider.state('login', {
-            url: '/login',
-            templateUrl: '/login.html',
-            controller: 'AuthCtrl',
-            onEnter: ['$state', 'auth', function ($state, auth) {
-                if (auth.isLoggedIn()) {
-                    $state.go('home');
-                }
-            }]
-        });
+        //});
 
-        $stateProvider.state('register', {
-            url: '/register',
-            templateUrl: '/register.html',
-            controller: 'AuthCtrl',
-            onEnter: ['$state', 'auth', function ($state, auth) {
-                if (auth.isLoggedIn()) {
-                    $state.go('home');
-                }
-            }]
-        });
-
-       //$urlRouterProvider.otherwise('home');
+        $urlRouterProvider.otherwise('home');
     }]);
-
 
 app.factory('animations', ['$http', 'auth', function ($http, auth) {
     var o = {
@@ -60,7 +35,6 @@ app.factory('animations', ['$http', 'auth', function ($http, auth) {
 
     o.getAll = function () {
         return $http.get('/animations').success(function (data) {
-            console.log(data);
             angular.copy(data, o.animations);
         });
     };
@@ -72,8 +46,6 @@ app.factory('animations', ['$http', 'auth', function ($http, auth) {
             o.animations.push(data);
         });
     };
-
-
 
     return o;
 }]);
@@ -137,6 +109,7 @@ app.controller('MainCtrl', [
     'auth',
     function ($scope, animations, auth) {
         $scope.animations = animations.animations;
+        console.log($scope.animations);
         $scope.isLoggedIn = auth.isLoggedIn;
 
         $scope.addAnimations = function () {
@@ -154,33 +127,6 @@ app.controller('MainCtrl', [
         };
     }]);
 
-app.controller('PostsCtrl', [
-    '$scope',
-    'posts',
-    'post',
-    'auth',
-    function ($scope, posts, post, auth) {
-        $scope.post = post;
-        $scope.isLoggedIn = auth.isLoggedIn;
-
-        $scope.addComment = function () {
-            if ($scope.body === '') {
-                return;
-            }
-            posts.addComment(post._id, {
-                body: $scope.body,
-            }).success(function (comment) {
-                $scope.post.comments.push(comment);
-            });
-            $scope.body = '';
-        };
-
-
-        $scope.incrementUpvotes = function (comment) {
-            posts.upvoteComment(post, comment);
-        };
-    }]);
-
 app.directive('modal', function() {
     return {
         restrict: 'A',
@@ -191,6 +137,7 @@ app.directive('modal', function() {
         }
     }
 });
+
 app.controller('AuthCtrl', [
     '$scope',
     '$state',
@@ -223,13 +170,4 @@ app.controller('AuthCtrl', [
         $scope.logOut = function () {
             auth.logOut();
             };
-    }]);
-
-app.controller('NavCtrl', [
-    '$scope',
-    'auth',
-    function($scope, auth){
-        $scope.isLoggedIn = auth.isLoggedIn;
-        $scope.currentUser = auth.currentUser;
-        $scope.logOut = auth.logOut;
     }]);

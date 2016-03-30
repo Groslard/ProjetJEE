@@ -17,7 +17,14 @@ var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+    Animation.find(function (err, animations) {
+        if (err) {
+            return next(err);
+        }
+        console.log(animations);
+        res.render('index', {animations: animations});
+    });
+
 });
 
 module.exports = router;

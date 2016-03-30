@@ -1,0 +1,57 @@
+<!-- LOCKSCREEN -->
+<section class="mlightbox" id="lockscreen">
+    <div id="lockscreen-content">
+        <img src="/img/logo.png" height="109" width="226" id="locklogo"  alt="Metromega"/>
+        <br/><br/>
+        <img src="/img/preloader.gif" id="lockloader"  alt="Loading.."/>
+    </div>
+</section>
+<!-- /LOCKSCREEN -->
+
+<!-- CONNEXION -->
+<section id="connexion" ng-controller="AuthCtrl">
+    <div id="opensidebar" ng-hide="isLoggedIn()">
+        <a class="link" href="#" data-option-value="*" data-toggle="modal" data-target=".popup-saisie-code">
+            <i>
+                <p class="title">Connexion</p>
+            </i>
+        </a>
+    </div>
+
+
+    <div id="opensidebar" ng-show="isLoggedIn()">
+        <a class="link" href="#" data-option-value="*" ng-click="logOut()">
+            <i>
+                <p class="title">Deconnexion</p>
+            </i>
+        </a>
+    </div>
+</section>
+
+<!-- /CONNEXION -->
+
+
+<!-- GALLERY LIGHTBOX -->
+<!-- /FORM CODE -->
+<div ng-controller="AuthCtrl" modal class="modal fade popup-saisie-code" tabindex="-1"  aria-labelledby="mySmallModalLabel" style="width: 0;">
+    <!-- SECTION TILES -->
+    <div class="tile black htmltile w3 h1">
+        <div class="tilecontent">
+            <div class="content">
+                <div ng-show="error" class="alert alert-error">
+                    <span>{{ error.message }}</span>
+                </div>
+
+                <form ng-submit="logIn()" class="form-dark form-inline" name="cform" >
+                    <div class="row-fluid">
+                        <input ng-model="user.code" type="text" class="span12" placeholder="Saisissez votre code ici">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block pull-right">Se connecter</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- /SECTION TILES -->

@@ -19,7 +19,8 @@ $(document).ready(function() {
         horizontalScroll: true,
         advanced: {
             autoScrollOnFocus: false,
-            autoExpandHorizontalScroll: true
+            autoExpandHorizontalScroll: false,
+            updateOnContentResize: true,
         }
     });
 

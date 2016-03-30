@@ -1,29 +1,12 @@
 var app = angular.module('flapperNews', ['ui.router']);
 
-
-app.config([
-    '$stateProvider',
-    '$urlRouterProvider',
-    function ($stateProvider, $urlRouterProvider) {
-        $stateProvider.state('home', {
-            url: '/home',
-            templateUrl: '/home.html',
-            controller: 'MainCtrl',
-            resolve: {
-                postPromise: ['animations', function (animations) {
-                    return animations.getAll();
-                }]
-            }
-        });
-
-       $urlRouterProvider.otherwise('home');
-    }]);
-
-
 app.factory('animations', ['$http', 'auth', function ($http, auth) {
     var o = {
         animations: []
     };
+    $http.get('/animations').success(function (data) {
+        angular.copy(data, o.animations);
+    });
 
     o.getAll = function () {
         return $http.get('/animations').success(function (data) {
@@ -38,8 +21,6 @@ app.factory('animations', ['$http', 'auth', function ($http, auth) {
             o.animations.push(data);
         });
     };
-
-
 
     return o;
 }]);
@@ -120,32 +101,6 @@ app.controller('MainCtrl', [
         };
     }]);
 
-app.controller('PostsCtrl', [
-    '$scope',
-    'posts',
-    'post',
-    'auth',
-    function ($scope, posts, post, auth) {
-        $scope.post = post;
-        $scope.isLoggedIn = auth.isLoggedIn;
-
-        $scope.addComment = function () {
-            if ($scope.body === '') {
-                return;
-            }
-            posts.addComment(post._id, {
-                body: $scope.body,
-            }).success(function (comment) {
-                $scope.post.comments.push(comment);
-            });
-            $scope.body = '';
-        };
-
-
-        $scope.incrementUpvotes = function (comment) {
-            posts.upvoteComment(post, comment);
-        };
-    }]);
 
 app.directive('modal', function() {
     return {
@@ -189,13 +144,4 @@ app.controller('AuthCtrl', [
         $scope.logOut = function () {
             auth.logOut();
             };
-    }]);
-
-app.controller('NavCtrl', [
-    '$scope',
-    'auth',
-    function($scope, auth){
-        $scope.isLoggedIn = auth.isLoggedIn;
-        $scope.currentUser = auth.currentUser;
-        $scope.logOut = auth.logOut;
     }]);

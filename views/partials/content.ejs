@@ -1,0 +1,190 @@
+<!-- MAIN CONTENT SECTION -->
+<section id="content">
+    <!-- SECTION -->
+    <section  ng-show="isLoggedIn()" class="clearfix section" id="animationform">
+        <div >
+            <!-- SECTION TITLE -->
+            <h3 class="block-title">Animation</h3>
+            <!-- /SECTION TITLE -->
+
+            <!-- SECTION TILES -->
+            <div class="tile black htmltile w3 h4">
+                <div class="tilecontent">
+                    <div class="content">
+
+                        <div class="hide textcenter" id="messagesuccess">
+                            <br/><br/><br/>
+                            <h1>Thank you! <a class="icon-envelope"></a></h1>
+                            <br/><br/><br/>
+                            <h3>Your message has been sent.</h3>
+                            <br/><br/><br/><br/><br/>
+                        </div>
+
+                        <div id="messageload" class="hide textcenter">
+                            <h3>Sending</h3><br/>
+                            <img src="/img/preloader.gif" alt="..."/>
+                        </div>
+
+                        <form ng-submit="addAnimations()" class="form-dark"  >
+                            <div class="row-fluid">
+                                <label>Titre <span class="hide label-important title-missing pull-right">Title is missing!</span></label>
+                                <input id="titre" name="titre" type="text" class="span12" placeholder="Titre de l'animation "ng-model="title">
+                            </div>
+
+
+                            <div class="row-fluid">
+                                <label>Type d'animation</label>
+                                <select id="subject" name="subject" class="span12">
+                                    <option value="service">Bateau</option>
+                                    <option value="suggestions">Pestacle</option>
+                                    <option value="product">Autre</option>
+                                </select>
+                            </div>
+
+                            <div class="row-fluid">
+                                <label>Description <span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
+                                <textarea  ng-model="description" name="description" placeholder="Description de l'animation "id="description" class="input-xlarge span12" rows="4"></textarea>
+                            </div>
+
+                            <div class="row-fluid">
+                            </div>
+                            <label>Date de l'animation<span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
+                            <input type="date" name="jour" min="2016-07-13" max="2016-07-19" >
+
+                            <div class="control-group">
+                                <label class="control-label" for="fileInput">Image </label>
+                                <div class="controls">
+                                    <input ng-model="link" class="input-file" id="fileInput" type="file">
+                                </div>
+                            </div>
+                            <div class="accordion" id="accordionOption">
+                                <!-- ajout des options avec du jkiri -->
+                            </div>
+                            <button type="button" class="btn btn-lg btn-primary btn-add-panel">
+                                Ajouter une option
+                            </button>
+
+                            <br><br>
+                            <div class="row-fluid">
+                                <button type="submit" class="btn btn-primary btn-block pull-right">Enregister</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /SECTION TILES -->
+        </div>
+    </section>
+    <!-- /SECTION -->
+
+    <!-- SECTION CREATION D'UTILISATEUR -->
+    <section ng-show="isLoggedIn()" ng-controller="AuthCtrl" class="clearfix section" id="creationform">
+        <div >
+            <h3 class="block-title">Création d'utilisateur</h3>
+
+
+            <div class="tile black htmltile w3 h2">
+                <div class="tilecontent">
+                    <div class="content">
+
+                        <div ng-show="error" class="alert alert-error">
+                            <span>{{ error.message }}</span>
+                        </div>
+
+                        <div ng-show="success" class="alert alert-success">
+                            <span>Utilisateur bien ajouté</span>
+                        </div>
+
+                        <form ng-submit="register()" class="form-dark">
+                            <div class="row-fluid">
+                                <input ng-model="user.nom" type="text" class="span12" placeholder="Nom de l'utilisateur">
+                            </div>
+                            <div class="row-fluid">
+                                <input ng-model="user.code" type="text" class="span12" placeholder="Code de l'utilisateur">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block pull-right">Créer l'utilisateur</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- SECTION -->
+
+    <section class="clearfix section" id="portfolio" data-option-key="filter">
+
+        <!-- SECTION TITLE -->
+        <h3 class="block-title">Critères</h3>
+        <!-- /SECTION TITLE -->
+
+        <!-- SECTION TILES -->
+        <div class="tile turquoise icon-featurefade w1 h1">
+            <a class="link" href="#" data-option-value="*" >
+                <i class="icon-list icon-4x"></i>
+                <p class="title">All</p>
+            </a>
+        </div>
+
+        <div class="tile yellow icon-featurefade w1 h1">
+            <a class="link" href="#" data-option-value=".visite">
+                <i class="icon-camera icon-4x"></i>
+                <p class="title">Photography</p>
+            </a>
+        </div>
+
+        <div class="tile blue icon-featurefade w1 h1">
+            <a class="link" href="#" data-option-value=".spectacle">
+                <i class="icon-laptop icon-4x"></i>
+                <p class="title">Web Design</p>
+            </a>
+        </div>
+
+        <div class="tile red icon-featurefade w1 h1">
+            <a class="link" href="#" data-option-value=".divers">
+                <i class="icon-youtube-play icon-4x"></i>
+                <p class="title">Videos</p>
+            </a>
+        </div>
+        <!-- SECTION -->
+
+
+    </section>
+    <!-- /SECTION -->
+
+    <section class="clearfix section" id="gallery">
+
+        <!-- SECTION TILES -->
+
+        {animations}
+        <!--<div ng-repeat="animation in animations" class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">-->
+        <!--<a href="#galleryimage" data-lightbox="mlightboximage" class="link"-->
+        <!--data-src="/img/04_preview.jpg" data-title="" data-description= "">-->
+        <!--<i class="icon-4x"></i>-->
+        <!--<img src="/img/04_preview.jpg" alt=""  />-->
+        <!--<p class="title">{{animation.titre}}</p>-->
+        <!--</a>-->
+        <!--</div>-->
+
+        <% for(var i=0; i<animations.length; i++) {%>
+        <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
+            <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
+               data-src="/img/04_preview.jpg" data-title="" data-description= "">
+                <i class="icon-4x"></i>
+                <img src="/img/04_preview.jpg" alt=""  />
+                <p class="title"><%= animations[i].titre %></p>
+
+                <%= animations[i] %>
+            </a>
+        </div>
+        <% } %>
+
+
+        <!-- /SECTION TILES -->
+
+    </section>
+
+
+
+</section>
+
+<!-- /MAIN CONTENT SECTION -->

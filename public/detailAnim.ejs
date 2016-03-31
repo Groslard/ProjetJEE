@@ -1,0 +1,43 @@
+
+        <!-- <div class="mlightbox-description">
+            <h2 class='mlightbox-title'>Titre animation</h2>
+            <p class="mlightbox-subtitle muted">Sous-titre animation</p>
+        </div> -->
+        <div class='accordion-group' id='accordion' style='border: 1px solid #52a8ec;border-radius: 0px' ng-controller="MainCtrl">
+
+            <div class='accordion-heading' style='margin-bottom: 0px;'>
+                <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' href='#collapse'>
+                    <h3 class="option-title" style="font-size: 20px;">{{ anim.titre }}</h3>
+                </a>
+            </div>
+            <div id='collapse' class='accordion-body collapse out lead' style='margin-bottom: 0px;'>
+                <div class='accordion-inner'>
+                    <div class='row-fluid ' style="font-size: 13px;">Navbars currently have a limitation with multiple .navbar-right classes. To properly spaccontent, we use negative margin on the last .navbar-right element. When there are multiple elements using that class, these margins don't work as intended. </div>
+                    <div class='row-fluid' style="font-weight: bold; text-align: center;"> Places restantes
+                        <div class="progress progress-striped active">
+                            <div class="bar" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                    <div class='row-fluid'>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Créneaux</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><button type='button' id='btnDel"+nbOption+"' class='btn btn-lg btn-primary  pull-right btn-del-panel'  style='height: 35px;'>X</button></td>
+                                <td>15h30 - 16h15</td>
+                            </tr>
+                            <tr>
+                                <td><button type='button' id='btnDel"+nbOption+"' class='btn btn-lg btn-primary  pull-right btn-del-panel disabled'  style='height: 35px;'>X</button></td>
+                                <td>16h15 - 17h00</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>

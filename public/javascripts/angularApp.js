@@ -82,25 +82,65 @@ app.controller('MainCtrl', [
     '$scope',
     'animations',
     'auth',
-    function ($scope, animations, auth) {
+    '$compile',
+    function ($scope, animations, auth, $compile) {
+        $scope.anim = null;
         $scope.animations = animations.animations;
-        $scope.isLoggedIn = auth.isLoggedIn;
+       // $scope.isLoggedIn = auth.isLoggedIn;
 
         $scope.addAnimations = function () {
             if (!$scope.title || $scope.title === '') {
                 return;
             }
+
+
+            var arrayOptions =  [{ titre: "option1" }, { titre: "option2" }];
+
             animations.create({
                 titre: $scope.title,
                 descriptif: $scope.description,
-                imgPath:$scope.link,
+                imgPath:$scope.link
             });
+
             $scope.title = '';
             $scope.link = '';
             $scope.description = '';
         };
-    }]);
+        $scope.getData = function(idAnimation){
+            // find anim
+            $scope.anim = animations.animations[0];
+//            animations.getAll().then(function (data) {
+//                // Grab the template
+//                $.get('/detailAnim.ejs', function (template) {
+//                    // Compile the EJS template.
+//                    $scope.anim = animations.animations[0];
+//                    var content = $compile(template)($scope);
+//console.log(animations.animations[0]);
+//
+//                    $('#detail-container').html(content);
+//
+//                });
+//             });
 
+        }
+    }
+
+]);
+
+app.directive("detailcontainer", function($compile){
+    return{
+        link: function(scope, element){
+            $.get('/detailAnim.ejs', function (template) {
+                var template = "<button ng-click='doSomething()'>{{anim.titre}}</button>";
+                var linkFn = $compile(template);
+                var content = linkFn(scope);
+                element.html(content);
+
+            });
+
+        }
+    }
+});
 
 app.directive('modal', function() {
     return {

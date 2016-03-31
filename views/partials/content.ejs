@@ -1,7 +1,7 @@
 <!-- MAIN CONTENT SECTION -->
 <section id="content">
     <!-- SECTION -->
-    <section  ng-show="isLoggedIn()" class="clearfix section" id="animationform">
+    <section class="clearfix section" id="animationform">
         <div >
             <!-- SECTION TITLE -->
             <h3 class="block-title">Animation</h3>
@@ -155,7 +155,6 @@
 
         <!-- SECTION TILES -->
 
-        {animations}
         <!--<div ng-repeat="animation in animations" class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">-->
         <!--<a href="#galleryimage" data-lightbox="mlightboximage" class="link"-->
         <!--data-src="/img/04_preview.jpg" data-title="" data-description= "">-->
@@ -166,15 +165,19 @@
         <!--</div>-->
 
         <% for(var i=0; i<animations.length; i++) {%>
-        <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
+        <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent" ng-click="getData('<%=animations[i]._id  %>')">
             <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
                data-src="/img/04_preview.jpg" data-title="" data-description= "">
                 <i class="icon-4x"></i>
                 <img src="/img/04_preview.jpg" alt=""  />
-                <p class="title"><%= animations[i].titre %></p>
+                <p class="title"><%= animations[i].titre %> &&
+                <% for(var j=0; j<animations[i].options.length; j++) {%>
+                <%= animations[i].options[j] %>
+                <% } %>
+                </p>
 
-                <%= animations[i] %>
             </a>
+            <%= animations[i] %>
         </div>
         <% } %>
 

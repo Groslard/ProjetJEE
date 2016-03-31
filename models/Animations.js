@@ -10,10 +10,10 @@ var AnimationSchema = new mongoose.Schema({
     descriptif: String,
     typeAnim: String,
     imgPath: String,
-    Option: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Option' }]
+    options: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Option' }]
 });
 
 
 
 mongoose.model('Animation', AnimationSchema);
-mongoose.model('AnimationRestauration', AnimationSchema);
+

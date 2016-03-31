@@ -10,7 +10,8 @@ var OptionSchema = new mongoose.Schema({
     description: String,
     duree: Number,
     nbMaxUser: Number,
-    animation: { type: mongoose.Schema.Types.ObjectId, ref: 'Animation' }
+    animation: { type: mongoose.Schema.Types.ObjectId, ref: 'Animation' },
+    creneaux: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Creneaux' }]
 });
 
 

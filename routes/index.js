@@ -17,11 +17,16 @@ var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+    Option.find(function (err, options) {
+        if (err) {
+            return next(err);
+        }
+    });
+
     Animation.find(function (err, animations) {
         if (err) {
             return next(err);
         }
-        console.log(animations);
         res.render('index', {animations: animations});
     });
 
@@ -43,7 +48,7 @@ router.get('/animations', function (req, res, next) {
     });
 });
 
-router.post('/animations', auth, function (req, res, next) {
+router.post('/animations', function (req, res, next) {
     var animation = new Animation(req.body);
    
 

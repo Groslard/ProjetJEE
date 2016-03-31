@@ -1,7 +1,7 @@
 <!-- MAIN CONTENT SECTION -->
-<section id="content">
+<section id="content" >
     <!-- SECTION -->
-    <section class="clearfix section" id="animationform">
+    <section  ng-show="isLoggedIn()" class="clearfix section" id="animationform">
         <div >
             <!-- SECTION TITLE -->
             <h3 class="block-title">Animation</h3>
@@ -28,33 +28,34 @@
                         <form ng-submit="addAnimations()" class="form-dark"  >
                             <div class="row-fluid">
                                 <label>Titre <span class="hide label-important title-missing pull-right">Title is missing!</span></label>
-                                <input id="titre" name="titre" type="text" class="span12" placeholder="Titre de l'animation "ng-model="title">
+                                <input id="titre" name="titre" type="text" class="span12" placeholder="Titre de l'animation "ng-model="titre">
                             </div>
 
 
                             <div class="row-fluid">
                                 <label>Type d'animation</label>
-                                <select id="subject" name="subject" class="span12">
-                                    <option value="service">Bateau</option>
-                                    <option value="suggestions">Pestacle</option>
-                                    <option value="product">Autre</option>
+                                <select id="subject" name="subject" class="span12" ng-model="typeAnim">
+                                    <option selected value="Bateau">Bateau</option>
+                                    <option value="Spectacle">Spectacle</option>
+                                    <option value="Restauration">Restauration</option>
+                                    <option value="Autre">Autre</option>
                                 </select>
                             </div>
 
                             <div class="row-fluid">
                                 <label>Description <span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
-                                <textarea  ng-model="description" name="description" placeholder="Description de l'animation "id="description" class="input-xlarge span12" rows="4"></textarea>
+                                <textarea  ng-model="descriptif" name="description" placeholder="Description de l'animation "id="description" class="input-xlarge span12" rows="4"></textarea>
                             </div>
 
                             <div class="row-fluid">
                             </div>
                             <label>Date de l'animation<span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
-                            <input type="date" name="jour" min="2016-07-13" max="2016-07-19" >
+                            <input type="date" name="jour" min="2016-07-13" max="2016-07-19" ng-model="descriptif">
 
                             <div class="control-group">
                                 <label class="control-label" for="fileInput">Image </label>
                                 <div class="controls">
-                                    <input ng-model="link" class="input-file" id="fileInput" type="file">
+                                    <input ng-model="imgPath" class="input-file" id="fileInput" type="file">
                                 </div>
                             </div>
                             <div class="accordion" id="accordionOption">
@@ -121,28 +122,35 @@
         <div class="tile turquoise icon-featurefade w1 h1">
             <a class="link" href="#" data-option-value="*" >
                 <i class="icon-list icon-4x"></i>
-                <p class="title">All</p>
+                <p class="title">Toutes</p>
             </a>
         </div>
 
         <div class="tile yellow icon-featurefade w1 h1">
-            <a class="link" href="#" data-option-value=".visite">
+            <a class="link" href="#" data-option-value=".Bateau">
                 <i class="icon-camera icon-4x"></i>
-                <p class="title">Photography</p>
+                <p class="title">Bateau</p>
             </a>
         </div>
 
         <div class="tile blue icon-featurefade w1 h1">
-            <a class="link" href="#" data-option-value=".spectacle">
+            <a class="link" href="#" data-option-value=".Restauration">
                 <i class="icon-laptop icon-4x"></i>
-                <p class="title">Web Design</p>
+                <p class="title">Restauration</p>
             </a>
         </div>
 
         <div class="tile red icon-featurefade w1 h1">
-            <a class="link" href="#" data-option-value=".divers">
+            <a class="link" href="#" data-option-value=".Spectacle">
                 <i class="icon-youtube-play icon-4x"></i>
-                <p class="title">Videos</p>
+                <p class="title">Spectacle</p>
+            </a>
+        </div>
+
+        <div class="tile red icon-featurefade w1 h1">
+            <a class="link" href="#" data-option-value=".Autre">
+                <i class="icon-youtube-play icon-4x"></i>
+                <p class="title">Autre</p>
             </a>
         </div>
         <!-- SECTION -->
@@ -155,29 +163,17 @@
 
         <!-- SECTION TILES -->
 
-        <!--<div ng-repeat="animation in animations" class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">-->
-        <!--<a href="#galleryimage" data-lightbox="mlightboximage" class="link"-->
-        <!--data-src="/img/04_preview.jpg" data-title="" data-description= "">-->
-        <!--<i class="icon-4x"></i>-->
-        <!--<img src="/img/04_preview.jpg" alt=""  />-->
-        <!--<p class="title">{{animation.titre}}</p>-->
-        <!--</a>-->
-        <!--</div>-->
-
         <% for(var i=0; i<animations.length; i++) {%>
-        <div class="tile visite imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent" ng-click="getData('<%=animations[i]._id  %>')">
+        <div ng-click="getDetailAnim()" class="tile <%= animations[i].typeAnim %> imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
             <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
                data-src="/img/04_preview.jpg" data-title="" data-description= "">
                 <i class="icon-4x"></i>
                 <img src="/img/04_preview.jpg" alt=""  />
                 <p class="title"><%= animations[i].titre %> &&
-                <% for(var j=0; j<animations[i].options.length; j++) {%>
-                <%= animations[i].options[j] %>
-                <% } %>
+
                 </p>
 
             </a>
-            <%= animations[i] %>
         </div>
         <% } %>
 

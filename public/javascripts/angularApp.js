@@ -86,29 +86,94 @@ app.controller('MainCtrl', [
     function ($scope, animations, auth, $compile) {
         $scope.anim = null;
         $scope.animations = animations.animations;
-       // $scope.isLoggedIn = auth.isLoggedIn;
+        $scope.isLoggedIn = auth.isLoggedIn;
 
         $scope.addAnimations = function () {
-            if (!$scope.title || $scope.title === '') {
+            if (!$scope.titre || $scope.titre === '') {
                 return;
             }
-
-
             var arrayOptions =  [{ titre: "option1" }, { titre: "option2" }];
 
-            animations.create({
-                titre: $scope.title,
-                descriptif: $scope.description,
-                imgPath:$scope.link
+            var anim ={
+                titre: $scope.titre,
+                descriptif: $scope.descriptif,
+                imgPath:$scope.imgPath,
+                typeAnim: $scope.typeAnim,
+                date: $scope.date
+            };
+
+            animations.create(anim).then(function(data){
+                console.log(animations.animations[animations.animations.length-1]);
             });
+
+            $scope.titre = '';
+            $scope.imgPath = '';
+            $scope.descriptif = '';
 
             $scope.title = '';
             $scope.link = '';
             $scope.description = '';
+
+            var nbOption = 0;
+
+            //$scope.addComment = function () {
+            //    if ($scope.body === '') {
+            //        return;
+            //    }
+            //    posts.addComment(post._id, {
+            //        body: $scope.body,
+            //    }).success(function (comment) {
+            //        $scope.post.comments.push(comment);
+            //    });
+            //    $scope.body = '';
+            //};
+            //
+            //$scope.addOption = function () {
+            //    var inputOption = $("");
+            //    $(".accordion" ).append(inputOption);
+            //    $compile(inputOption)($scope);
+            //
+            //    $("#creneauOption"+nbOption+"").editRangeSlider({
+            //        bounds: {min: 8, max: 20},
+            //        defaultValues:{min: 9, max: 18}
+            //    });
+            //
+            //    $("#btnDel0").on("click", function () {
+            //        $("#accordion0").remove();
+            //    });
+            //    $("#btnDel1").on("click", function () {
+            //        $("#accordion1").remove();
+            //    });
+            //    $("#btnDel2").on("click", function () {
+            //        $("#accordion2").remove();
+            //    });
+            //    $("#btnDel3").on("click", function () {
+            //        $("#accordion3").remove();
+            //    });
+            //    $("#btnDel4").on("click", function () {
+            //        $("#accordion4").remove();
+            //    });
+            //    $("#btnDel5").on("click", function () {
+            //        $("#accordion5").remove();
+            //    });
+            //    $("#btnDel6").on("click", function () {
+            //        $("#accordion6").remove();
+            //    });
+            //    $("#btnDel7").on("click", function () {
+            //        $("#accordion7").remove();
+            //    });
+            //    $("#btnDel8").on("click", function () {
+            //        $("#accordion8").remove();
+            //    });
+            //    nbOption++;
+            //}
         };
-        $scope.getData = function(idAnimation){
+
+        $scope.getDetailAnim = function(idAnimation){
             // find anim
+
             $scope.anim = animations.animations[0];
+            console.log($scope.anim);
 //            animations.getAll().then(function (data) {
 //                // Grab the template
 //                $.get('/detailAnim.ejs', function (template) {
@@ -131,7 +196,7 @@ app.directive("detailcontainer", function($compile){
     return{
         link: function(scope, element){
             $.get('/detailAnim.ejs', function (template) {
-                var template = "<button ng-click='doSomething()'>{{anim.titre}}</button>";
+                var template = "<button >{{anim.titre}}</button>";
                 var linkFn = $compile(template);
                 var content = linkFn(scope);
                 element.html(content);

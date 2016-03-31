@@ -10,7 +10,8 @@ var AnimationSchema = new mongoose.Schema({
     descriptif: String,
     typeAnim: String,
     imgPath: String,
-    options: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Option' }]
+    Option: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Option' }],
+    date: Date
 });
 
 

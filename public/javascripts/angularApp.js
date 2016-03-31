@@ -104,6 +104,7 @@ app.controller('MainCtrl', [
 
             animations.create(anim).then(function(data){
                 console.log(animations.animations[animations.animations.length-1]);
+
             });
 
             $scope.titre = '';
@@ -196,11 +197,8 @@ app.directive("detailcontainer", function($compile){
     return{
         link: function(scope, element){
             $.get('/detailAnim.ejs', function (template) {
-                var template = "<button >{{anim.titre}}</button>";
-                var linkFn = $compile(template);
-                var content = linkFn(scope);
+                var content =  $compile(template)(scope);
                 element.html(content);
-
             });
 
         }

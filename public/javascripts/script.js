@@ -16,11 +16,9 @@ $(document).ready(function() {
             enable: true
         },
         mouseWheelPixels: 500,
-        horizontalScroll: true,
         advanced: {
-            autoScrollOnFocus: false,
-            autoExpandHorizontalScroll: false,
-            updateOnContentResize: true,
+            autoScrollOnFocus: true,
+            autoExpandHorizontalScroll: true
         }
     });
 

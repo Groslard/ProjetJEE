@@ -221,6 +221,7 @@ app.controller('MainCtrl', [
                 });
         };
 
+
         $scope.logIn = function () {
             auth.logIn($scope.user).error(function (error) {
                 $scope.error = error;
@@ -232,6 +233,7 @@ app.controller('MainCtrl', [
                     $scope.user = user;
                     $("#content").mCustomScrollbar("update");
                 })
+
             });
         };
         $scope.logOut = function () {
@@ -242,7 +244,7 @@ app.controller('MainCtrl', [
 ]);
 
 
-app.directive("tuile", ['$compile', 'animations', function($compile, animations){
+app.directive("tuile", ['$compile', 'animations', 'auth', function($compile, animations, auth){
     var template;
     $.get('/detailAnim.ejs', function (generatedTemplate) {
         template = generatedTemplate;
@@ -254,6 +256,16 @@ app.directive("tuile", ['$compile', 'animations', function($compile, animations)
                     var id = element.attr("idAnim");
                     animations.get(id).then(function(data) {
                         scope.animation = data;
+
+                        var listIdCreneauxCurrentUser = [];
+                        var i = 0;
+                        auth.currentUserInstance().then(function(user){
+                            angular.forEach(user.reservations, function(reservation, key) {
+                                listIdCreneauxCurrentUser[i++] = reservation._id;
+                            });
+                        })
+                        scope.listIdCreneauxCurrentUserTemp = listIdCreneauxCurrentUser;
+                        console.log(listIdCreneauxCurrentUser);
                         var content = $compile(template)(scope);
 
                         $("#detailcontainer").html(content);

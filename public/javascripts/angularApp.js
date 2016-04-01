@@ -139,8 +139,10 @@ app.controller('MainCtrl', [
     'auth',
     function ($scope, animations, auth) {
         $scope.animations = animations.animations;
-        $scope.isLoggedIn = auth.isLoggedIn;
         $scope.nbOption=0;
+        $scope.user = {};
+        $scope.isLoggedIn = auth.isLoggedIn;
+        $scope.isAdmin = auth.isAdmin;
 
         $scope.options = [];
 
@@ -155,12 +157,9 @@ app.controller('MainCtrl', [
             return listeCreneaux;
         };
 
-
         $scope.addAnimations = function () {
-            if (!$scope.titre/* || !$scope.imgPath || !$scope.typeAnim || !$scope.date*/) {
-                return;
-            }
 
+            console.log($scope);
             var anim ={
                 titre: $scope.titre,
                 descriptif: $scope.descriptif,
@@ -171,6 +170,7 @@ app.controller('MainCtrl', [
 
             animations.create(anim).then(function(data){
                 var animAdded = data.data;
+                console.log('animAdded');
                 angular.forEach($scope.options, function(option, key) {
                     var hDeb = option.heureDebut;
                     var hFin = option.heureFin;
@@ -191,9 +191,7 @@ app.controller('MainCtrl', [
             $scope.titre = '';
             $scope.descriptif = '';
             $scope.imgPath = '';
-
         };
-
 
         $scope.addReservation = function(idCreneau){
             animations.addReservation(idCreneau).error(function(error){
@@ -202,51 +200,46 @@ app.controller('MainCtrl', [
                 .then(function(data){
                 console.log(data);
             });
-            //    if ($scope.body === '') {
-            //        return;
-            //    }
-            //    posts.addComment(post._id, {
-            //        body: $scope.body,
-            //    }).success(function (comment) {
-            //        $scope.post.comments.push(comment);
-            //    });
-            //    $scope.body = '';
         };
-
 
         $scope.removeOption = function(id) {
             $("#accordion"+id).remove();
         };
-
         $scope.updateScroll = function() {
             $("#content").mCustomScrollbar("update");
+        };
+
+        $scope.register = function () {
+            auth.register($scope.user).
+                error(function (error) {
+                    $scope.error = error;
+                    $scope.success = false;
+                }).
+                success(function(data) {
+                    $scope.error = false;
+                    $scope.success = true;
+                });
+        };
+
+        $scope.logIn = function () {
+            auth.logIn($scope.user).error(function (error) {
+                $scope.error = error;
+            }).success(function(data){
+                $scope.dismiss();
+            }).then(function(data){
+                $("#content").mCustomScrollbar("update");
+                auth.currentUserInstance().then(function(user){
+                    $scope.user = user;
+                    $("#content").mCustomScrollbar("update");
+                })
+            });
+        };
+        $scope.logOut = function () {
+            auth.logOut();
         };
     }
 
 ]);
-
-
-app.directive("reservations", ['$compile', 'auth', function($compile, auth){
-    var template;
-    $.get('/reservations.ejs', function (generatedTemplate) {
-        template = generatedTemplate;
-    });
-    return{
-        link: function(scope, element){
-            auth.currentUserInstance().then(function(data){
-                scope.user = data;
-
-                if(scope.user){
-                    var content = $compile(template)(scope);
-                    console.log(content);
-                    console.log(scope.user);
-                    element.html(content);
-                }
-            });
-
-        }
-    }
-}]);
 
 
 app.directive("tuile", ['$compile', 'animations', function($compile, animations){
@@ -316,40 +309,3 @@ app.directive('modal', function() {
         }
     }
 });
-
-app.controller('AuthCtrl', [
-    '$scope',
-    '$state',
-    'auth',
-    '$element',
-    function ($scope, $state, auth, $element) {
-        $scope.user = {};
-        $scope.isLoggedIn = auth.isLoggedIn;
-
-        $scope.register = function () {
-            auth.register($scope.user).
-                error(function (error) {
-                    $scope.error = error;
-                    $scope.success = false;
-                }).
-                success(function(data) {
-                    $scope.error = false;
-                    $scope.success = true;
-                });
-        };
-
-
-        $scope.logIn = function () {
-            auth.logIn($scope.user).error(function (error) {
-                $scope.error = error;
-            }).success(function(data){
-                $scope.dismiss();
-            }).then(function(data){
-                    $("#content").mCustomScrollbar("update");
-            });
-        };
-
-        $scope.logOut = function () {
-            auth.logOut();
-            };
-    }]);

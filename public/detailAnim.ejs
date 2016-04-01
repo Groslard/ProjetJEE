@@ -1,7 +1,6 @@
 
 
 <div ng-repeat="option in animation.options " class='accordion-group' id='accordion' style='border: 1px solid #52a8ec;border-radius: 0px' >
-
     <div class='accordion-heading' style='margin-bottom: 0px;'>
         <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' ng-href="{{ '#collapse' + option._id }}">
             <h3 class="option-title" style="font-size: 20px;">{{ option.titre }} &nbsp &nbsp({{option.duree}} min)</h3>
@@ -20,9 +19,11 @@
                     <tr ng-repeat="creneau in option.creneaux">
                         <td>
                             <button ng-click="addReservation(creneau._id)" type='button'
-                                    class='btn btn-lg btn-primary ' style='' ng-if="!listIdCreneauxCurrentUserTemp.include(creneau._id)">
+                                    class='btn btn-lg btn-primary disabled' style='' ng-if="if(listIdCreneauxCurrentUserTemp.indexOf(creneau._id) == -1)">
                                 Réserver
                             </button>
+
+
                         </td>
                         <td>
                              {{(creneau.debut/60) - (creneau.debut/60)%1}}h{{creneau.debut%60}}min - {{ (creneau.fin/60) - (creneau.fin/60)%1}}h{{ creneau.fin%60 }}min

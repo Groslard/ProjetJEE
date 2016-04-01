@@ -2226,6 +2226,7 @@ button.close {
     color: #333333;
     background-color: #eeeeee;
     *background-color: #e1e1e1;
+
 }
 .btn:active,
 .btn.active {

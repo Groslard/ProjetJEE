@@ -265,7 +265,6 @@ app.directive("tuile", ['$compile', 'animations', 'auth', function($compile, ani
                             });
                         })
                         scope.listIdCreneauxCurrentUserTemp = listIdCreneauxCurrentUser;
-                        console.log(listIdCreneauxCurrentUser);
                         var content = $compile(template)(scope);
 
                         $("#detailcontainer").html(content);

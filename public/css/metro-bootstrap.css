@@ -1797,7 +1797,7 @@ table {
 }
 .table-striped tbody > tr:nth-child(odd) > td,
 .table-striped tbody > tr:nth-child(odd) > th {
-    background-color: #f9f9f9;
+    background-color: #3a3a3a;
 }
 .table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th {
@@ -2176,6 +2176,7 @@ button.close {
     background: transparent;
     border: 0;
     -webkit-appearance: none;
+    cursor: not-allowed;
 }
 .btn {
     display: inline-block;

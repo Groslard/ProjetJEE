@@ -15,10 +15,13 @@ $(document).ready(function() {
         scrollButtons: {
             enable: true
         },
+        horizontalScroll: true,
         mouseWheelPixels: 500,
         advanced: {
-            autoScrollOnFocus: true,
-            autoExpandHorizontalScroll: true
+            autoScrollOnFocus: false,
+            autoExpandHorizontalScroll: true,
+            aupdateOnContentResize: false,
+            updateOnImageLoad: false
         }
     });
 
@@ -268,6 +271,9 @@ $(document).ready(function() {
         $(this).mlightbox('blog');
     });
 
-
+    $('input[type="file"]').on('change', function (event, files, label) {
+        var file_name = this.value.replace(/\\/g, '/').replace(/.*\//, '')
+        $('.filename').text(file_name);
+    });
 
 });

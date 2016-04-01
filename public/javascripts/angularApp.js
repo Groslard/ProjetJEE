@@ -68,7 +68,6 @@ app.factory('auth', ['$http', '$window', function ($http, $window) {
 
         if (token) {
             var payload = JSON.parse($window.atob(token.split('.')[1]));
-            console.log(payload);
             return payload.exp > Date.now() / 1000;
 
         } else {
@@ -138,10 +137,12 @@ app.controller('MainCtrl', [
             return listeCreneaux;
         };
 
+
         $scope.addAnimations = function () {
-            if (!$scope.titre || $scope.titre === '') {
+            if (!$scope.titre/* || !$scope.imgPath || !$scope.typeAnim || !$scope.date*/) {
                 return;
             }
+            console.log($scope.imgPath);
             var anim ={
                 titre: $scope.titre,
                 descriptif: $scope.descriptif,
@@ -159,8 +160,20 @@ app.controller('MainCtrl', [
             });
 
             $scope.titre = '';
-            $scope.imgPath = '';
             $scope.descriptif = '';
+          /*  $scope.imgPath = '';
+            $scope.imgInput = '';*/
+            /*angular.forEach($scope.options, function(option, key) {
+                option.titre = '';
+                option.description = '';
+                option.nbMaxUser = '';
+            });*/
+           /*  $scope.options.forEach(function(option) {
+                 option.titre = '';
+                 option.description = '';
+                 option.nbMaxUser = '';
+                 option.duree = '';
+             });*/
         };
 
 
@@ -181,9 +194,13 @@ app.controller('MainCtrl', [
             $("#accordion"+id).remove();
         };
 
+        $scope.updateScroll = function() {
+            $("#content").mCustomScrollbar("update");
+        };
     }
 
 ]);
+
 
 app.directive("tuile", ['$compile', 'animations', function($compile, animations){
     var template;
@@ -277,11 +294,14 @@ app.controller('AuthCtrl', [
                 });
         };
 
+
         $scope.logIn = function () {
             auth.logIn($scope.user).error(function (error) {
                 $scope.error = error;
             }).success(function(data){
                 $scope.dismiss();
+            }).then(function(data){
+                    $("#content").mCustomScrollbar("update");
             });
         };
 

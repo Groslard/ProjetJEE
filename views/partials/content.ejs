@@ -1,7 +1,9 @@
 <!-- MAIN CONTENT SECTION -->
 <section id="content" >
+
+    <!-- /SECTION -->
     <!-- SECTION -->
-    <section  ng-show="isLoggedIn()" class="clearfix section" id="animationform">
+    <section  ng-show="isLoggedIn()" class="clearfix section" id="animationform" >
         <div >
             <!-- SECTION TITLE -->
             <h3 class="block-title" style="color: black">Animation</h3>
@@ -55,7 +57,8 @@
                             <div class="control-group">
                                 <label class="control-label" for="fileInput">Image </label>
                                 <div class="controls">
-                                    <input ng-model="imgPath" class="input-file" id="fileInput" type="file">
+                                    <input ng-model="imgInput"  class="input-file" id="fileInput" type="file">
+                                    <span ng-model="imgPath" class="filename"></span>
                                 </div>
                             </div>
                             <div class="accordion" id="accordionOption">
@@ -76,12 +79,10 @@
             <!-- /SECTION TILES -->
         </div>
     </section>
-    <!-- /SECTION -->
-
     <!-- SECTION CREATION D'UTILISATEUR -->
-    <section ng-hide="isLoggedIn()" ng-controller="AuthCtrl" class="clearfix section" id="creationform">
+    <section ng-show="isLoggedIn()" ng-controller="AuthCtrl" class="clearfix section" id="creationform">
         <div >
-            <h3 class="block-title" style="color: black">Création d'utilisateur</h3>
+            <h3 class="block-title" style="color: black" >Création d'utilisateur</h3>
 
 
             <div class="tile black htmltile w3 h2">
@@ -110,6 +111,7 @@
             </div>
         </div>
     </section>
+
     <!-- SECTION -->
 
     <section class="clearfix section" id="portfolio" data-option-key="filter">
@@ -166,9 +168,9 @@
         <% for(var i=0; i<animations.length; i++) {%>
         <div tuile  idAnim="<%= animations[i]._id %>" class="tile <%= animations[i].typeAnim %> imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
             <a  href="#galleryimage" data-lightbox="mlightboximage" class="link"
-               data-src="/img/04_preview.jpg" data-title="" data-description= "">
+               data-src="<%= animations[i].imgPath %>" data-title="" data-description= "">
                 <i class="icon-4x"></i>
-                <img src="/img/04_preview.jpg" alt=""  />
+                <img src="<%= animations[i].imgPath %>" alt=""  />
                 <p class="title"><%= animations[i].titre %>
                 </p>
 
@@ -180,7 +182,6 @@
         <!-- /SECTION TILES -->
 
     </section>
-
 
 
 </section>

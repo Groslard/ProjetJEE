@@ -8,7 +8,7 @@ Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var User = mongoose.model('User');
 var Animation = mongoose.model('Animation');
-var Creneaux = mongoose.model('Creneau');
+var Creneau = mongoose.model('Creneau');
 var Option = mongoose.model('Option');
 
 
@@ -80,12 +80,19 @@ router.param('animation', function (req, res, next, id) {
 
 
 router.get('/animations/:animation', function (req, res, next) {
-    console.log(req.animation)
     req.animation.populate('options', function (err, animation) {
         if (err) {
             return next(err);
         }
-        res.json(animation);
+
+        Creneau.populate(animation,{
+            path: 'options.creneaux',
+        }, function(err, creneaux){
+            if ( err ) return res.json(400, err);
+            req.animation.options.creneaux = creneaux;
+            res.json(animation);
+        });
+
     });
 });
 
@@ -105,6 +112,38 @@ router.post('/animations/:animation/options', auth, function (req, res, next) {
             }
 
             res.json(option);
+        });
+    });
+});
+
+router.param('option', function (req, res, next, id) {
+    var query = Option.findById(id);
+
+    query.exec(function (err, option) {
+        if (err) {
+            return next(err);
+        }
+        if (!option) {
+            return next(new Error('can\'t find option'));
+        }
+        req.option = option;
+        return next();
+    });
+});
+
+router.post('/options/:option/creneaux', auth, function (req, res, next) {
+    var creneau = new Creneau(req.body);
+    creneau.option = req.option;
+    creneau.save(function (err, comment) {
+        if (err) {
+            return next(err);
+        }
+        req.option.creneaux.push(creneau);
+        req.option.save(function (err, animation) {
+            if (err) {
+                return next(err);
+            }
+            res.json(creneau);
         });
     });
 });

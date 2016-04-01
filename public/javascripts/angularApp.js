@@ -1,15 +1,5 @@
 var app = angular.module('flapperNews', ['ui.router']);
 
-//var getCreaneaux = function(heureDebut, heureFin, dureeMin) {
-//    var listeCreneaux = [];
-//    var j=0;
-//    for (var i = heureDebut; i <= heureFin; i += (dureeMin / 60 + 5 / 60)){
-//        var heureParse = heureDebut - (heureDebut % 1);
-//        var minParse = (heureDebut % 1) / 60;
-//        listeCreneaux[j++] = {heureParse,minParse};
-//    }
-//    return listeCreneaux;
-//};
 
 app.factory('animations', ['$http', 'auth', function ($http, auth) {
     var o = {
@@ -44,6 +34,12 @@ app.factory('animations', ['$http', 'auth', function ($http, auth) {
 
     o.addOption = function (id, option) {
         return $http.post('/animations/' + id + '/options', option, {
+            headers: {Authorization: 'Bearer '+auth.getToken()}
+        });
+    };
+
+    o.addCreneau = function (optionId, creneau){
+        return $http.post('/options/' + optionId + '/creneaux', creneau, {
             headers: {Authorization: 'Bearer '+auth.getToken()}
         });
     };
@@ -129,10 +125,10 @@ app.controller('MainCtrl', [
         var getCreneaux = function(heureDebut, heureFin, dureeMin) {
             var listeCreneaux = [];
             var j=0;
-            for (; heureDebut < heureFin; heureDebut += (dureeMin / 60 + 5 / 60)){
-                var heureParse = heureDebut - (heureDebut % 1);
-                var minParse = heureDebut % 1;
-               listeCreneaux[j++] = [heureParse,minParse];
+            var minDeb = heureDebut*60;
+            var minFin = heureFin*60;
+            for (; minDeb < minFin; minDeb += dureeMin + 5){
+               listeCreneaux[j++] = {"debut":minDeb, "fin":minDeb + dureeMin};
             }
             return listeCreneaux;
         };
@@ -153,10 +149,20 @@ app.controller('MainCtrl', [
 
             animations.create(anim).then(function(data){
                 var animAdded = data.data;
-                angular.forEach($scope.options, function(value, key) {
-                    animations.addOption(animAdded._id, value);
+                angular.forEach($scope.options, function(option, key) {
+                    var hDeb = option.heureDebut;
+                    var hFin = option.heureFin;
+                    animations.addOption(animAdded._id, option).then(function(data){
+                        var optionAdded = data.data;
+                        var creneaux = getCreneaux(hDeb, hFin, optionAdded.duree);
+                        angular.forEach(creneaux, function(creneau, key) {
+                            animations.addCreneau(optionAdded._id, creneau).error(function (error) {
+                                console.log(error);
+                            });
+                        });
+
+                    });
                 });
-                //animations.addOption(animAdded._id, $scope.options)
             });
 
             $scope.titre = '';
@@ -215,6 +221,7 @@ app.directive("tuile", ['$compile', 'animations', function($compile, animations)
                     animations.get(id).then(function(data) {
                         scope.animation = data;
                         var content = $compile(template)(scope);
+
                         $("#detailcontainer").html(content);
                         $("#animtitle").html(data.titre);
                         $("#animdescription").html(data.descriptif);
@@ -252,10 +259,6 @@ app.directive("addanimation", function($compile) {
                     $(".accordion" ).append(content);
                     scope.nbOption++;
                     id++;
-                   //$('#creneauOption0').editRangeSlider({
-                   //     bounds: {min: 8, max: 20},
-                   //     defaultValues:{min: 9, max: 18}
-                   //});
                 })
             });
         }

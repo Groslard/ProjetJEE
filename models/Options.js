@@ -11,7 +11,7 @@ var OptionSchema = new mongoose.Schema({
     duree: Number,
     nbMaxUser: Number,
     animation: { type: mongoose.Schema.Types.ObjectId, ref: 'Animation' },
-    creneaux: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Creneaux' }]
+    creneaux: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Creneau' }]
 });
 
 

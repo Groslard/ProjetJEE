@@ -253,10 +253,6 @@ $(document).ready(function() {
         }
     });
 
-
-
-
-   
     
     /*==== mLightBox ====*/
     $('a[data-lightbox="mlightboximage"]').each(function() {
@@ -273,7 +269,7 @@ $(document).ready(function() {
 
     $('input[type="file"]').on('change', function (event, files, label) {
         var file_name = this.value.replace(/\\/g, '/').replace(/.*\//, '')
-        $('.filename').text(file_name);
+        $('#filename').text(file_name);
     });
 
 });

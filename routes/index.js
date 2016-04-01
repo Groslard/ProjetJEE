@@ -62,6 +62,69 @@ router.post('/animations', function (req, res, next) {
     });
 });
 
+
+//route animation by id
+
+router.param('animation', function (req, res, next, id) {
+    var query = Animation.findById(id);
+
+    query.exec(function (err, post) {
+        if (err) {
+            return next(err);
+        }
+        if (!post) {
+            return next(new Error('can\'t find animation'));
+        }
+
+        req.animations = animation;
+        return next();
+    });
+});
+
+
+router.get('/animations/:animation', function (req, res, next) {
+    req.animation.populate('options', function (err, animation) {
+        if (err) {
+            return next(err);
+        }
+
+        res.json(animation);
+    });
+});
+
+//ajout option
+router.post('/options', function (req, res, next) {
+    var option = new Option(req.body);
+
+
+
+    option.save(function (err, option) {
+        if (err) {
+            return next(err);
+        }
+        console.log(Option.findOne());
+        res.json(option);
+    });
+});
+
+//ajout creneau
+router.post('/creneaux', function (req, res, next) {
+    var creneau = new Creneau(req.body);
+
+
+
+    creneau.save(function (err, creneau) {
+        if (err) {
+            return next(err);
+        }
+        console.log(Creneau.findOne());
+        res.json(creneau);
+    });
+});
+
+
+
+
 router.param('post', function (req, res, next, id) {
     var query = Post.findById(id);
 

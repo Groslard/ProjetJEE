@@ -1,5 +1,16 @@
 var app = angular.module('flapperNews', ['ui.router']);
 
+var getCreaneaux = function(heureDebut, heureFin, dureeMin) {
+    var listeCreneaux = [];
+    var j=0;
+    for (var i = heureDebut; i <= heureFin; i += (dureeMin / 60 + 5 / 60)){
+        var heureParse = heureDebut - (heureDebut % 1);
+        var minParse = (heureDebut % 1) / 60;
+        listeCreneaux[j++] = {heureParse,minParse};
+    }
+    return listeCreneaux;
+}
+
 app.factory('animations', ['$http', 'auth', function ($http, auth) {
     var o = {
         animations: []
@@ -169,6 +180,14 @@ app.controller('MainCtrl', [
             //    nbOption++;
             //}
         };
+
+
+        $scope.addReservation = function(idCreneau){
+            // find anim
+        //user ajour creneau
+        //
+
+        }
 
         $scope.getDetailAnim = function(idAnimation){
             // find anim

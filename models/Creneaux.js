@@ -6,8 +6,9 @@ var mongoose = require('mongoose');
 
 
 var CreneauSchema = new mongoose.Schema({
-    debut: String,
-    options: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Option' }],
+    heureDebut: Number,
+    minDebut: Number,
+    option: { type: mongoose.Schema.Types.ObjectId, ref: 'Option' },
     users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }]
 });
 

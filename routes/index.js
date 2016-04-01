@@ -50,14 +50,11 @@ router.get('/animations', function (req, res, next) {
 
 router.post('/animations', function (req, res, next) {
     var animation = new Animation(req.body);
-   
-
 
     animation.save(function (err, animation) {
         if (err) {
             return next(err);
         }
-        console.log(Animation.findOne());
         res.json(animation);
     });
 });
@@ -95,8 +92,6 @@ router.get('/animations/:animation', function (req, res, next) {
 //ajout option
 router.post('/options', function (req, res, next) {
     var option = new Option(req.body);
-
-
 
     option.save(function (err, option) {
         if (err) {

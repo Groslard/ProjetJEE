@@ -50,7 +50,7 @@
                             <div class="row-fluid">
                             </div>
                             <label>Date de l'animation<span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
-                            <input type="date" name="jour" min="2016-07-13" max="2016-07-19" ng-model="descriptif">
+                            <input type="date" name="jour" min="2016-07-13" max="2016-07-19" ng-model="date">
 
                             <div class="control-group">
                                 <label class="control-label" for="fileInput">Image </label>
@@ -61,7 +61,7 @@
                             <div class="accordion" id="accordionOption">
                                 <!-- ajout des options avec du jkiri -->
                             </div>
-                            <button type="button" class="btn btn-lg btn-primary btn-add-panel">
+                            <button addanimation type="button" class="btn btn-lg btn-primary btn-add-panel">
                                 Ajouter une option
                             </button>
 
@@ -164,13 +164,12 @@
         <!-- SECTION TILES -->
 
         <% for(var i=0; i<animations.length; i++) {%>
-        <div ng-click="getDetailAnim()" class="tile <%= animations[i].typeAnim %> imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
-            <a href="#galleryimage" data-lightbox="mlightboximage" class="link"
+        <div tuile  idAnim="<%= animations[i]._id %>" class="tile <%= animations[i].typeAnim %> imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
+            <a  href="#galleryimage" data-lightbox="mlightboximage" class="link"
                data-src="/img/04_preview.jpg" data-title="" data-description= "">
                 <i class="icon-4x"></i>
                 <img src="/img/04_preview.jpg" alt=""  />
-                <p class="title"><%= animations[i].titre %> &&
-
+                <p class="title"><%= animations[i].titre %>
                 </p>
 
             </a>

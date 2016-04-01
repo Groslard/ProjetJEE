@@ -1,19 +1,20 @@
 var app = angular.module('flapperNews', ['ui.router']);
 
-var getCreaneaux = function(heureDebut, heureFin, dureeMin) {
-    var listeCreneaux = [];
-    var j=0;
-    for (var i = heureDebut; i <= heureFin; i += (dureeMin / 60 + 5 / 60)){
-        var heureParse = heureDebut - (heureDebut % 1);
-        var minParse = (heureDebut % 1) / 60;
-        listeCreneaux[j++] = {heureParse,minParse};
-    }
-    return listeCreneaux;
-}
+//var getCreaneaux = function(heureDebut, heureFin, dureeMin) {
+//    var listeCreneaux = [];
+//    var j=0;
+//    for (var i = heureDebut; i <= heureFin; i += (dureeMin / 60 + 5 / 60)){
+//        var heureParse = heureDebut - (heureDebut % 1);
+//        var minParse = (heureDebut % 1) / 60;
+//        listeCreneaux[j++] = {heureParse,minParse};
+//    }
+//    return listeCreneaux;
+//};
 
 app.factory('animations', ['$http', 'auth', function ($http, auth) {
     var o = {
-        animations: []
+        animations: [],
+        animationAdded : null
     };
     $http.get('/animations').success(function (data) {
         angular.copy(data, o.animations);
@@ -29,6 +30,7 @@ app.factory('animations', ['$http', 'auth', function ($http, auth) {
         return $http.post('/animations', animation, {
             headers: {Authorization: 'Bearer '+auth.getToken()}
         }).success(function (data) {
+            o.animationAdded = data;
             o.animations.push(data);
         });
     };
@@ -93,18 +95,19 @@ app.controller('MainCtrl', [
     '$scope',
     'animations',
     'auth',
-    '$compile',
-    function ($scope, animations, auth, $compile) {
-        $scope.anim = null;
+    function ($scope, animations, auth) {
         $scope.animations = animations.animations;
         $scope.isLoggedIn = auth.isLoggedIn;
+        $scope.nbOption=0;
+
+        $scope.options = [];
 
         $scope.addAnimations = function () {
             if (!$scope.titre || $scope.titre === '') {
                 return;
             }
-            var arrayOptions =  [{ titre: "option1" }, { titre: "option2" }];
 
+            console.log($scope.options);
             var anim ={
                 titre: $scope.titre,
                 descriptif: $scope.descriptif,
@@ -114,112 +117,89 @@ app.controller('MainCtrl', [
             };
 
             animations.create(anim).then(function(data){
-                console.log(animations.animations[animations.animations.length-1]);
-
+                var animAdded = data.data;
             });
 
             $scope.titre = '';
             $scope.imgPath = '';
             $scope.descriptif = '';
-
-            $scope.title = '';
-            $scope.link = '';
-            $scope.description = '';
-
-            var nbOption = 0;
-
-            //$scope.addComment = function () {
-            //    if ($scope.body === '') {
-            //        return;
-            //    }
-            //    posts.addComment(post._id, {
-            //        body: $scope.body,
-            //    }).success(function (comment) {
-            //        $scope.post.comments.push(comment);
-            //    });
-            //    $scope.body = '';
-            //};
-            //
-            //$scope.addOption = function () {
-            //    var inputOption = $("");
-            //    $(".accordion" ).append(inputOption);
-            //    $compile(inputOption)($scope);
-            //
-            //    $("#creneauOption"+nbOption+"").editRangeSlider({
-            //        bounds: {min: 8, max: 20},
-            //        defaultValues:{min: 9, max: 18}
-            //    });
-            //
-            //    $("#btnDel0").on("click", function () {
-            //        $("#accordion0").remove();
-            //    });
-            //    $("#btnDel1").on("click", function () {
-            //        $("#accordion1").remove();
-            //    });
-            //    $("#btnDel2").on("click", function () {
-            //        $("#accordion2").remove();
-            //    });
-            //    $("#btnDel3").on("click", function () {
-            //        $("#accordion3").remove();
-            //    });
-            //    $("#btnDel4").on("click", function () {
-            //        $("#accordion4").remove();
-            //    });
-            //    $("#btnDel5").on("click", function () {
-            //        $("#accordion5").remove();
-            //    });
-            //    $("#btnDel6").on("click", function () {
-            //        $("#accordion6").remove();
-            //    });
-            //    $("#btnDel7").on("click", function () {
-            //        $("#accordion7").remove();
-            //    });
-            //    $("#btnDel8").on("click", function () {
-            //        $("#accordion8").remove();
-            //    });
-            //    nbOption++;
-            //}
         };
 
 
         $scope.addReservation = function(idCreneau){
-            // find anim
-        //user ajour creneau
-        //
 
-        }
+        };
 
-        $scope.getDetailAnim = function(idAnimation){
-            // find anim
 
-            $scope.anim = animations.animations[0];
-            console.log($scope.anim);
-//            animations.getAll().then(function (data) {
-//                // Grab the template
-//                $.get('/detailAnim.ejs', function (template) {
-//                    // Compile the EJS template.
-//                    $scope.anim = animations.animations[0];
-//                    var content = $compile(template)($scope);
-//console.log(animations.animations[0]);
-//
-//                    $('#detail-container').html(content);
-//
-//                });
-//             });
+        $scope.removeOption = function(id) {
+            $("#accordion"+id).remove();
+        };
+        //$scope.addComment = function () {
+        //    if ($scope.body === '') {
+        //        return;
+        //    }
+        //    posts.addComment(post._id, {
+        //        body: $scope.body,
+        //    }).success(function (comment) {
+        //        $scope.post.comments.push(comment);
+        //    });
+        //    $scope.body = '';
+        //};
 
-        }
     }
 
 ]);
 
-app.directive("detailcontainer", function($compile){
+app.directive("tuile", ['$compile', 'animations', function($compile, animations){
+    var template;
+    $.get('/detailAnim.ejs', function (generatedTemplate) {
+        template = generatedTemplate;
+    });
     return{
         link: function(scope, element){
-            $.get('/detailAnim.ejs', function (template) {
-                var content =  $compile(template)(scope);
-                element.html(content);
-            });
+            element.on("click", function() {
+                scope.$apply(function() {
+                    var id = element.attr("idAnim");
+                    scope.anim = animations.animations[0];
 
+                    var content = $compile(template)(scope);
+                    $("#detailcontainer").html(content);
+                })
+            });
+        }
+    }
+}]);
+
+
+app.directive("addanimation", function($compile) {
+    var id=-1;
+    var template;
+    $.get('/addOption.ejs', function (generatedTemplate) {
+        template = generatedTemplate;
+    });
+    return{
+        //scope: { data: '=' },
+        link: function(scope, element){
+            element.on("click", function() {
+                scope.$apply(function() {
+                    template = template.replace("["+id+"]", "["+(id+1)+"]");
+                    template = template.replace("["+id+"]", "["+(id+1)+"]");
+                    template = template.replace("["+id+"]", "["+(id+1)+"]");
+                    template = template.replace("removeOption("+id+")", "removeOption("+(id+1)+")");
+
+                    scope.id = scope.nbOption;
+                    var content =  $compile(template)(scope);
+                    $(".accordion" ).append(content);
+                    scope.nbOption++;
+                    id++;
+                    //<script type="text/javascript">
+                    //    $("#creneauOption0").editRangeSlider({
+                    //        bounds: {min: 8, max: 20},
+                    //        defaultValues:{min: 9, max: 18}
+                    //    });
+                    //</script>
+                })
+            });
         }
     }
 });
@@ -234,6 +214,7 @@ app.directive('modal', function() {
         }
     }
 });
+
 app.controller('AuthCtrl', [
     '$scope',
     '$state',

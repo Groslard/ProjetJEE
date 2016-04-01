@@ -160,6 +160,7 @@ app.controller('MainCtrl', [
             if (!$scope.titre/* || !$scope.imgPath || !$scope.typeAnim || !$scope.date*/) {
                 return;
             }
+
             var anim ={
                 titre: $scope.titre,
                 descriptif: $scope.descriptif,
@@ -184,10 +185,13 @@ app.controller('MainCtrl', [
 
                     });
                 });
+                $("#accordionOption").empty();
             });
 
             $scope.titre = '';
             $scope.descriptif = '';
+            $scope.imgPath = '';
+
         };
 
 

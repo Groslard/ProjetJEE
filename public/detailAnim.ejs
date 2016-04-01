@@ -1,17 +1,13 @@
 
 
-<div ng-repeat="option in animation.options " class='accordion-group' id='accordion' style='border: 1px solid #52a8ec;border-radius: 0px'
-     ng-controller="MainCtrl">
-
+<div ng-repeat="option in animation.options " class='accordion-group' id='accordion' style='border: 1px solid #52a8ec;border-radius: 0px' >
     <div class='accordion-heading' style='margin-bottom: 0px;'>
-        <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' href='#collapse'>
+        <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' ng-href="{{ '#collapse' + option._id }}">
             <h3 class="option-title" style="font-size: 20px;">{{ option.titre }} &nbsp &nbsp({{option.duree}} min)</h3>
         </a>
     </div>
-    <div id='collapse' class='accordion-body collapse out lead' style='margin-bottom: 0px;'>
+    <div ng-attr-id="{{ 'collapse' + option._id }}" class='accordion-body collapse out lead' style='margin-bottom: 0px;'>
         <div class='accordion-inner'>
-
-
             <div class='row-fluid'>
                 <table class="table">
                     <thead>
@@ -22,8 +18,8 @@
                     <tbody>
                     <tr ng-repeat="creneau in option.creneaux">
                         <td>
-                            <button ng-click="addReservation(creneau._id)" type='button' id='btnDel"+nbOption+"'
-                                    class='btn btn-lg btn-primary   btn-del-panel' style=''>Reserver
+                            <button ng-click="addReservation(creneau._id)" type='button'
+                                    class='btn btn-lg btn-primary ' style=''>Reserver
                             </button>
                         </td>
                         <td>

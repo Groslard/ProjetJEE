@@ -25,7 +25,7 @@
                         <td>
                              {{(creneau.debut/60) - (creneau.debut/60)%1}}h{{creneau.debut%60}}min - {{ (creneau.fin/60) - (creneau.fin/60)%1}}h{{ creneau.fin%60 }}min
                             <div class="progress progress-striped active">
-                                <div class="bar" style="width:{{((((option.nbMaxUser)-creneau.users.length)/(option.nbMaxUser))*100)}}%;"></div>
+                                <div class="bar" style="width:{{(100-((((option.nbMaxUser)-creneau.users.length)/(option.nbMaxUser))*100))}}%;"></div>
                             </div>
                         </td>
 

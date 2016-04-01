@@ -1,20 +1,27 @@
 <!-- SECTION RESERVATIONS -->
-        <div ng-repeat="creneau in user.reservations " class='accordion-group' id='accordion' style='border: 1px solid #52a8ec;border-radius: 0px'>
-            <div class='accordion-heading' style='margin-bottom: 0px;'>
-                <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' ng-href="{{ '#collapse' + creneau._id }}">
-                    <h3 class="option-title" style="font-size: 20px;">{{creneau.option.animation.titre}} {{creneau.option.titre}}</h3>
-                </a>
-            </div>
-            <div ng-attr-id="{{ 'collapse' + creneau._id }}" class='accordion-body collapse out lead' style='margin-bottom: 0px;'>
-                <div class='accordion-inner'>
-                    <div class='blue row-fluid'>
-                        <div class="textcenter">Créneau</div>
-                        <div>
-                            <button ng-click="addReservation(creneau._id)" type='button' class='btn btn-lg btn-primary ' style=''>Annuler
-                            </button>
-                            {{(creneau.debut/60) - (creneau.debut/60)%1}}h{{creneau.debut%60}}min - {{ (creneau.fin/60) - (creneau.fin/60)%1}}h{{ creneau.fin%60 }}min</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="creneau in user.reservations">
+        <td>
+            <button ng-click="addReservation(creneau._id)" type='button'
+                    class='btn red btn-lg btn-primary mCSB_buttonUp ' style=''>X
+            </button>
+        </td>
+        <td style="font-size: 18px; vertical-align: middle;">
+            {{creneau.option.titre}}
+        </td>
+        <td style="font-size: 18px; vertical-align: middle;">
+            {{(creneau.debut/60) - (creneau.debut/60)%1}}h{{creneau.debut%60}}min - {{ (creneau.fin/60) - (creneau.fin/60)%1}}h{{ creneau.fin%60 }}min
+        </td>
+
+
+    </tr>
+    </tbody>
+</table>
+
 <!-- /SECTION RESERVATIONS -->

@@ -1,26 +1,8 @@
 <!-- MAIN CONTENT SECTION -->
 <section id="content" >
-    <section ng-show="isLoggedIn()" class="clearfix section" >
-        <h3 class="block-title">Réservations</h3>
-        <div reservations class="tile black htmltile w3 h4">
-            <div ng-repeat="creneau in user.reservations " class='accordion-group' id='accordion' style='border: 1px solid #52a8ec;border-radius: 0px'>
-                <div class='accordion-heading' style='margin-bottom: 0px;'>
-                    <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' ng-href="{{ '#collapse' + creneau._id }}">
-                        <h3 class="option-title" style="font-size: 20px;">{{creneau.option.animation.titre}} {{creneau.option.titre}}</h3>
-                    </a>
-                </div>
-                <div ng-attr-id="{{ 'collapse' + creneau._id }}" class='accordion-body collapse out lead' style='margin-bottom: 0px;'>
-                    <div class='accordion-inner'>
-                        <div class='blue row-fluid'>
-                            <div class="textcenter">Créneau</div>
-                            <div>
-                                <button ng-click="addReservation(creneau._id)" type='button' class='btn btn-lg btn-primary   btn-del-panel' style=''>Annuler
-                                </button>
-                                {{(creneau.debut/60) - (creneau.debut/60)%1}}h{{creneau.debut%60}}min - {{ (creneau.fin/60) - (creneau.fin/60)%1}}h{{ creneau.fin%60 }}min</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section ng-show="isLoggedIn()" class="clearfix section">
+        <h3 class="block-title" style="color: black" >Réservations</h3>
+        <div reservations class="tile bar-gray htmltile w3 h4">
         </div>
     </section>
     <!-- /SECTION -->
@@ -168,7 +150,7 @@
             </a>
         </div>
 
-        <div class="tile red icon-featurefade w1 h1">
+        <div class="tile orange icon-featurefade w1 h1">
             <a class="link" href="#" data-option-value=".Autre">
                 <i class="icon-flag icon-4x"></i>
                 <p class="title">Autre</p>
@@ -187,9 +169,9 @@
         <% for(var i=0; i<animations.length; i++) {%>
         <div tuile  idAnim="<%= animations[i]._id %>" class="tile <%= animations[i].typeAnim %> imagetile imagetile-overlay imagetile-scaledown w2 h1 title-indent">
             <a  href="#galleryimage" data-lightbox="mlightboximage" class="link"
-               data-src=<%= animations[i].imgPath %>" data-title="" data-description= "">
+               data-src="/img/fdd.png" data-title="" data-description= "">
                 <i class="icon-4x"></i>
-                <img src="<%= animations[i].imgPath %>" alt=""  />
+                <img src="/img/fdd.png" alt=""  />
                 <p class="title"><%= animations[i].titre %>
                 </p>
 

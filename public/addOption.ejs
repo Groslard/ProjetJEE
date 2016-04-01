@@ -4,7 +4,7 @@
         <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionOption' href="#collapse{{::id }}">
             <div class='row-fluid' style='margin-bottom: 0px;'>
                 <input ng-model='options[0].titre' type='text' class='span12' placeholder='Titre de l`option'
-                                                                      style='margin-bottom: 0px; width:85%;'>
+                                                                      style='margin-bottom: 0px; width:85%;' required>
                 <button ng-click="removeOption(0)" type='button' id="btnDel{{::id }}" class='btn btn-lg btn-primary  pull-right btn-del-panel'
                         style='height: 35px;'>{{::id}}</button>
             </div>
@@ -13,22 +13,22 @@
     <div id="collapse{{::id }}" class='accordion-body collapse out' style='margin-bottom: 0px;'>
         <div class='accordion-inner'>
             <div class='row-fluid'>
-                <label>Description <span class='hide label-important message-missing pull-right'>You forgot to enter a description!</span></label>
+                <label>Description </label>
                 <textarea name='description' placeholder='Description de l`option ' id='description'
                           class='input-xlarge span12' rows='4' ng-model='options[0].description'></textarea>
             </div>
             <div class='row-fluid'> Nombre de places <input ng-model='options[0].nbMaxUser' type='number'
-                                                            name='points' min='0' max='10000' step='1' value='100'>
+                                                            name='points' min='0' max='10000' step='1' value='100' required>
             </div>
             <div class='row-fluid'> Durée de l'option (en minutes) <input ng-model='options[0].duree' type='number' name='points' min='1' max='480'
-                                                                          step='' value='30'></div>
+                                                                          step='' value='30' required></div>
             <div class='row-fluid'>
                 <label>Créneau de l'animation</label>
 
                     <input ng-model='options[0].heureDebut' type='number' name='points' min='0' max='24'
-                           step='' value='10' style=" width:90px;"> -
+                           step='' value='10' style=" width:90px;" required> -
                     <input ng-model='options[0].heureFin' type='number' name='points' min='0' max='24'
-                           step='' value='15' style=" width:90px;">
+                           step='' value='15' style=" width:90px;" required>
             </div>
             <br/>
         </div>

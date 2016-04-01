@@ -29,13 +29,13 @@
 
                         <form ng-submit="addAnimations()" class="form-dark"  >
                             <div class="row-fluid">
-                                <label>Titre <span class="hide label-important title-missing pull-right">Title is missing!</span></label>
-                                <input id="titre" name="titre" type="text" class="span12" placeholder="Titre de l'animation "ng-model="titre">
+                                <label>Titre </label>
+                                <input id="titre" name="titre" type="text" class="span12" placeholder="Titre de l'animation "ng-model="titre" required>
                             </div>
 
                             <div class="row-fluid">
                                 <label>Type d'animation</label>
-                                <select id="subject" name="subject" class="span12" ng-model="typeAnim">
+                                <select id="subject" name="subject" class="span12" ng-model="typeAnim" required>
                                     <option selected value="Bateau">Bateau</option>
                                     <option value="Spectacle">Spectacle</option>
                                     <option value="Restauration">Restauration</option>
@@ -44,14 +44,14 @@
                             </div>
 
                             <div class="row-fluid">
-                                <label>Description <span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
-                                <textarea  ng-model="descriptif" name="description" placeholder="Description de l'animation "id="description" class="input-xlarge span12" rows="4"></textarea>
+                                <label>Description </label>
+                                <textarea  ng-model="descriptif" name="description" placeholder="Description de l'animation "id="description" class="input-xlarge span12" rows="4" ></textarea>
                             </div>
 
                             <div class="row-fluid">
                             </div>
-                            <label>Date de l'animation<span class="hide label-important message-missing pull-right">You forgot to enter a description!</span></label>
-                            <input type="date" name="jour" min="2016-07-13" max="2016-07-19" ng-model="date">
+                            <label>Date de l'animation</label>
+                            <input type="date" name="jour" min="2016-07-13" max="2016-07-19" ng-model="date" required>
 
                             <div class="control-group">
                                 <label class="control-label" for="fileInput">Image </label>

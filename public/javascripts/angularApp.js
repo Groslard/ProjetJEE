@@ -102,12 +102,23 @@ app.controller('MainCtrl', [
 
         $scope.options = [];
 
+        var getCreneaux = function(heureDebut, heureFin, dureeMin) {
+            var listeCreneaux = [];
+            var j=0;
+            for (; heureDebut < heureFin; heureDebut += (dureeMin / 60 + 5 / 60)){
+                var heureParse = heureDebut - (heureDebut % 1);
+                var minParse = heureDebut % 1;
+               listeCreneaux[j++] = [heureParse,minParse];
+            }
+            return listeCreneaux;
+        };
+
         $scope.addAnimations = function () {
             if (!$scope.titre || $scope.titre === '') {
                 return;
             }
-
-            console.log($scope.options);
+            console.log($scope.options[0].heureDebut,$scope.options[0].heureFin,$scope.options[0].duree);
+            console.log(getCreneaux($scope.options[0].heureDebut,$scope.options[0].heureFin,$scope.options[0].duree));
             var anim ={
                 titre: $scope.titre,
                 descriptif: $scope.descriptif,
@@ -182,10 +193,14 @@ app.directive("addanimation", function($compile) {
         link: function(scope, element){
             element.on("click", function() {
                 scope.$apply(function() {
+
+                    template = template.replace("["+id+"]", "["+(id+1)+"]");
                     template = template.replace("["+id+"]", "["+(id+1)+"]");
                     template = template.replace("["+id+"]", "["+(id+1)+"]");
                     template = template.replace("["+id+"]", "["+(id+1)+"]");
                     template = template.replace("removeOption("+id+")", "removeOption("+(id+1)+")");
+                    template = template.replace("["+id+"]", "["+(id+1)+"]");
+                    template = template.replace("["+id+"]", "["+(id+1)+"]");
 
                     scope.id = scope.nbOption;
                     var content =  $compile(template)(scope);

@@ -65,154 +65,53 @@ router.post('/animations', function (req, res, next) {
 router.param('animation', function (req, res, next, id) {
     var query = Animation.findById(id);
 
-    query.exec(function (err, post) {
+    query.exec(function (err, animation) {
         if (err) {
             return next(err);
         }
-        if (!post) {
+        if (!animation) {
             return next(new Error('can\'t find animation'));
         }
 
-        req.animations = animation;
+        req.animation = animation;
         return next();
     });
 });
 
 
 router.get('/animations/:animation', function (req, res, next) {
+    console.log(req.animation)
     req.animation.populate('options', function (err, animation) {
         if (err) {
             return next(err);
         }
-
         res.json(animation);
     });
 });
 
-//ajout option
-router.post('/options', function (req, res, next) {
+router.post('/animations/:animation/options', auth, function (req, res, next) {
     var option = new Option(req.body);
+    option.animation = req.animation;
 
-    option.save(function (err, option) {
-        if (err) {
-            return next(err);
-        }
-        console.log(Option.findOne());
-        res.json(option);
-    });
-});
-
-//ajout creneau
-router.post('/creneaux', function (req, res, next) {
-    var creneau = new Creneau(req.body);
-
-
-
-    creneau.save(function (err, creneau) {
-        if (err) {
-            return next(err);
-        }
-        console.log(Creneau.findOne());
-        res.json(creneau);
-    });
-});
-
-
-
-
-router.param('post', function (req, res, next, id) {
-    var query = Post.findById(id);
-
-    query.exec(function (err, post) {
-        if (err) {
-            return next(err);
-        }
-        if (!post) {
-            return next(new Error('can\'t find post'));
-        }
-
-        req.post = post;
-        return next();
-    });
-});
-
-router.get('/posts/:post', function (req, res, next) {
-    req.post.populate('comments', function (err, post) {
+    option.save(function (err, comment) {
         if (err) {
             return next(err);
         }
 
-        res.json(post);
-    });
-});
-
-router.put('/posts/:post/upvote', auth, function (req, res, next) {
-    req.post.upvote(function (err, post) {
-        if (err) {
-            return next(err);
-        }
-
-        res.json(post);
-    });
-});
-
-// COMENTS ROUTES
-
-router.param('comment', function (req, res, next, id) {
-    var query = Comment.findById(id);
-    query.exec(function (err, comment) {
-        if (err) {
-            return next(err);
-        }
-        if (!comment) {
-            return next(new Error('can\'t find comment'));
-        }
-
-        req.comment = comment;
-        return next();
-    });
-});
-
-router.get('/posts/:post/comments', function (req, res, next) {
-    Comment.find(function (err, comments) {
-        if (err) {
-            return next(err);
-        }
-
-        res.json(comments);
-    });
-});
-
-router.post('/posts/:post/comments', auth, function (req, res, next) {
-    var comment = new Comment(req.body);
-    comment.post = req.post;
-    comment.author = req.payload.nom;
-
-    comment.save(function (err, comment) {
-        if (err) {
-            return next(err);
-        }
-
-        req.post.comments.push(comment);
-        req.post.save(function (err, post) {
+        req.animation.options.push(option);
+        req.animation.save(function (err, animation) {
             if (err) {
                 return next(err);
             }
 
-            res.json(comment);
+            res.json(option);
         });
     });
 });
 
-router.put('/posts/:post/comments/:comment/upvote', auth, function (req, res, next) {
-    req.comment.upvote(function (err, post) {
-        if (err) {
-            return next(err);
-        }
 
-        res.json(post);
-    });
-});
+
+
 
 // LOGIN ROUTES
 

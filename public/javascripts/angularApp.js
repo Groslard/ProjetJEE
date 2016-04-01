@@ -16,6 +16,7 @@ app.factory('animations', ['$http', 'auth', function ($http, auth) {
         animations: [],
         animationAdded : null
     };
+
     $http.get('/animations').success(function (data) {
         angular.copy(data, o.animations);
     });
@@ -26,12 +27,24 @@ app.factory('animations', ['$http', 'auth', function ($http, auth) {
         });
     };
 
+    o.get = function (id) {
+        return $http.get('/animations/' + id).then(function (res) {
+            return res.data;
+        });
+    };
+
     o.create = function (animation) {
         return $http.post('/animations', animation, {
             headers: {Authorization: 'Bearer '+auth.getToken()}
         }).success(function (data) {
             o.animationAdded = data;
             o.animations.push(data);
+        });
+    };
+
+    o.addOption = function (id, option) {
+        return $http.post('/animations/' + id + '/options', option, {
+            headers: {Authorization: 'Bearer '+auth.getToken()}
         });
     };
 
@@ -55,8 +68,20 @@ app.factory('auth', ['$http', '$window', function ($http, $window) {
 
         if (token) {
             var payload = JSON.parse($window.atob(token.split('.')[1]));
+            console.log(payload);
             return payload.exp > Date.now() / 1000;
 
+        } else {
+            return false;
+        }
+    };
+
+    auth.isAdmin = function () {
+        var token = auth.getToken();
+
+        if (token) {
+            var payload = JSON.parse($window.atob(token.split('.')[1]));
+            return payload.nom == "admin";
         } else {
             return false;
         }
@@ -117,8 +142,6 @@ app.controller('MainCtrl', [
             if (!$scope.titre || $scope.titre === '') {
                 return;
             }
-            console.log($scope.options[0].heureDebut,$scope.options[0].heureFin,$scope.options[0].duree);
-            console.log(getCreneaux($scope.options[0].heureDebut,$scope.options[0].heureFin,$scope.options[0].duree));
             var anim ={
                 titre: $scope.titre,
                 descriptif: $scope.descriptif,
@@ -129,6 +152,10 @@ app.controller('MainCtrl', [
 
             animations.create(anim).then(function(data){
                 var animAdded = data.data;
+                angular.forEach($scope.options, function(value, key) {
+                    animations.addOption(animAdded._id, value);
+                });
+                //animations.addOption(animAdded._id, $scope.options)
             });
 
             $scope.titre = '';
@@ -138,24 +165,21 @@ app.controller('MainCtrl', [
 
 
         $scope.addReservation = function(idCreneau){
-
+            //    if ($scope.body === '') {
+            //        return;
+            //    }
+            //    posts.addComment(post._id, {
+            //        body: $scope.body,
+            //    }).success(function (comment) {
+            //        $scope.post.comments.push(comment);
+            //    });
+            //    $scope.body = '';
         };
 
 
         $scope.removeOption = function(id) {
             $("#accordion"+id).remove();
         };
-        //$scope.addComment = function () {
-        //    if ($scope.body === '') {
-        //        return;
-        //    }
-        //    posts.addComment(post._id, {
-        //        body: $scope.body,
-        //    }).success(function (comment) {
-        //        $scope.post.comments.push(comment);
-        //    });
-        //    $scope.body = '';
-        //};
 
     }
 
@@ -171,11 +195,15 @@ app.directive("tuile", ['$compile', 'animations', function($compile, animations)
             element.on("click", function() {
                 scope.$apply(function() {
                     var id = element.attr("idAnim");
-                    scope.anim = animations.animations[0];
+                    animations.get(id).then(function(data) {
+                        scope.animation = data;
+                        var content = $compile(template)(scope);
+                        $("#detailcontainer").html(content);
+                        $("#animtitle").html(data.titre);
+                        $("#animdescription").html(data.descriptif);
+                    })
 
-                    var content = $compile(template)(scope);
-                    $("#detailcontainer").html(content);
-                })
+                });
             });
         }
     }
@@ -207,12 +235,10 @@ app.directive("addanimation", function($compile) {
                     $(".accordion" ).append(content);
                     scope.nbOption++;
                     id++;
-                    //<script type="text/javascript">
-                    //    $("#creneauOption0").editRangeSlider({
-                    //        bounds: {min: 8, max: 20},
-                    //        defaultValues:{min: 9, max: 18}
-                    //    });
-                    //</script>
+                   //$('#creneauOption0').editRangeSlider({
+                   //     bounds: {min: 8, max: 20},
+                   //     defaultValues:{min: 9, max: 18}
+                   //});
                 })
             });
         }

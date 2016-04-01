@@ -3,7 +3,8 @@
             <h2 class='mlightbox-title'>Titre animation</h2>
             <p class="mlightbox-subtitle muted">Sous-titre animation</p>
         </div> -->
-        <div ng-repeat="option in animations.options ">
+        {{animation.titre}}
+        <div ng-repeat="option in animation.options ">
         <div class='accordion-group' id='accordion' style='border: 1px solid #52a8ec;border-radius: 0px'>
 
             <div class='accordion-heading' style='margin-bottom: 0px;'>
@@ -32,7 +33,7 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td><button type='button' ng-click="addReservation({{creneau._id}})"  style='height: 35px;'>Reserver</button></td>
+                                        <td><button type='button' ng-click="addReservation(creneau._id)"  style='height: 35px;'>Reserver</button></td>
                                         <td>{{creneau.debut}}-{{((creneau.debut)+(option.duree))}}</td>
                                     </tr>
                                     </tbody>

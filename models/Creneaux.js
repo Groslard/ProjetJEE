@@ -9,7 +9,7 @@ var CreneauSchema = new mongoose.Schema({
     fin:Number,
     debut: Number,
     option: { type: mongoose.Schema.Types.ObjectId, ref: 'Option' },
-    users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }]
+    users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 
 

@@ -44,6 +44,10 @@ app.factory('animations', ['$http', 'auth', function ($http, auth) {
         });
     };
 
+    o.addReservation = function(creneau_id){
+        return $http.post('/creneaux/' + creneau_id + '/users/' + auth.getId(), {
+        });
+    };
     return o;
 }]);
 
@@ -57,6 +61,15 @@ app.factory('auth', ['$http', '$window', function ($http, $window) {
 
     auth.getToken = function () {
         return $window.localStorage['flapper-news-token'];
+    };
+
+    auth.getId = function () {
+        var token = auth.getToken();
+        if(!token){
+            return null;
+        }
+        var payload = JSON.parse($window.atob(token.split('.')[1]));
+        return payload._id;
     };
 
     auth.isLoggedIn = function () {
@@ -89,6 +102,15 @@ app.factory('auth', ['$http', '$window', function ($http, $window) {
 
             return payload.nom;
         }
+    };
+
+    auth.currentUserInstance = function () {
+        if(!auth.getId()){
+            return null;
+        }
+        return $http.get('/users/'+auth.getId()).then(function (res) {
+            return res.data;
+        });
     };
 
     auth.register = function (user) {
@@ -138,7 +160,6 @@ app.controller('MainCtrl', [
             if (!$scope.titre/* || !$scope.imgPath || !$scope.typeAnim || !$scope.date*/) {
                 return;
             }
-            console.log($scope.imgPath);
             var anim ={
                 titre: $scope.titre,
                 descriptif: $scope.descriptif,
@@ -167,23 +188,16 @@ app.controller('MainCtrl', [
 
             $scope.titre = '';
             $scope.descriptif = '';
-          /*  $scope.imgPath = '';
-            $scope.imgInput = '';*/
-            /*angular.forEach($scope.options, function(option, key) {
-                option.titre = '';
-                option.description = '';
-                option.nbMaxUser = '';
-            });*/
-           /*  $scope.options.forEach(function(option) {
-                 option.titre = '';
-                 option.description = '';
-                 option.nbMaxUser = '';
-                 option.duree = '';
-             });*/
         };
 
 
         $scope.addReservation = function(idCreneau){
+            animations.addReservation(idCreneau).error(function(error){
+                console.log(error);
+            })
+                .then(function(data){
+                console.log(data);
+            });
             //    if ($scope.body === '') {
             //        return;
             //    }
@@ -206,6 +220,29 @@ app.controller('MainCtrl', [
     }
 
 ]);
+
+
+app.directive("reservations", ['$compile', 'auth', function($compile, auth){
+    var template;
+    $.get('/reservations.ejs', function (generatedTemplate) {
+        template = generatedTemplate;
+    });
+    return{
+        link: function(scope, element){
+            auth.currentUserInstance().then(function(data){
+                scope.user = data;
+
+                if(scope.user){
+                    var content = $compile(template)(scope);
+                    console.log(content);
+                    console.log(scope.user);
+                    element.html(content);
+                }
+            });
+
+        }
+    }
+}]);
 
 
 app.directive("tuile", ['$compile', 'animations', function($compile, animations){

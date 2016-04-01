@@ -15,15 +15,19 @@
     <!-- Scripts are at the bottom of the page -->
 
 </head>
-<body ng-app="flapperNews" ng-controller="MainCtrl" ng-mouseover="updateScroll()">
+<body ng-app="flapperNews" ng-controller="MainCtrl">
 
 <% include partials/header.ejs %>
+
+<section class="clearfix section" ng-controller="MainCtrl">
+    <h3 class="block-title">Réservations</h3>
+    <div reservations class="tile black htmltile w3 h4">
+    </div>
+</section>
 
 <% include partials/content.ejs %>
 
 <% include partials/connexion.ejs %>
-
-<% include partials/reservations.ejs %>
 
 <% include partials/detailAnim.ejs %>
 

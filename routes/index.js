@@ -96,6 +96,31 @@ router.get('/animations/:animation', function (req, res, next) {
     });
 });
 
+router.get('/users/:user', function (req, res, next) {
+    req.user.populate('reservations', function (err, user) {
+        if (err) {
+            return next(err);
+        }
+
+        Option.populate(user,{
+            path: 'reservations.option',
+        }, function(err, option){
+            if ( err ) return res.json(400, err);
+            req.user.reservations.option = option;
+
+            Animation.populate(user,{
+               path : 'reservations.option.animation',
+            }, function(err, animation){
+                if ( err ) return res.json(400, err);
+                req.user.reservations.option.animation = animation;
+                res.json(user);
+            });
+
+        });
+
+    });
+});
+
 router.post('/animations/:animation/options', auth, function (req, res, next) {
     var option = new Option(req.body);
     option.animation = req.animation;
@@ -149,6 +174,58 @@ router.post('/options/:option/creneaux', auth, function (req, res, next) {
 });
 
 
+router.param('creneau', function (req, res, next, id) {
+    var query = Creneau.findById(id);
+
+    query.exec(function (err, creneau) {
+        if (err) {
+            return next(err);
+        }
+        if (!creneau) {
+            return next(new Error('can\'t find creneau'));
+        }
+        req.creneau = creneau;
+        return next();
+    });
+});
+
+router.param('user', function (req, res, next, id) {
+    var query = User.findById(id);
+
+    query.exec(function (err, user) {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return next(new Error('can\'t find user'));
+        }
+        req.user = user;
+        return next();
+    });
+});
+
+
+router.post('/creneaux/:creneau/users/:user', function(req, res,next){
+    var creneau = req.creneau;
+    var user = req.user;
+
+
+    user.reservations.push(creneau);
+    creneau.users.push(user);
+    user.save(function (err, user) {
+        if (err) {
+            return next(err);
+        }
+    });
+    creneau.save(function (err, creneau) {
+        if (err) {
+            return next(err);
+        }
+    });
+
+});
+
+
 
 
 
@@ -194,5 +271,7 @@ router.post('/login', function (req, res, next) {
         }
     })(req, res, next);
 });
+
+
 
 
